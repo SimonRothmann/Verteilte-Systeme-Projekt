@@ -38,6 +38,22 @@
                     <input type="hidden" name="csrf_token" value="${csrf_token}">
 
                     <%-- Eingabefelder --%>
+                    <label for="signup_forename">
+                        Vorname:
+                        <span class="required">*</span>
+                    </label>
+                    <div class="side-by-side">
+                        <input type="text" name="signup_forename" value="${signup_form.values["signup_forename"][0]}">
+                    </div>
+                    
+                    <label for="signup_surname">
+                        Nachname:
+                        <span class="required">*</span>
+                    </label>
+                    <div class="side-by-side">
+                        <input type="text" name="signup_surname" value="${signup_form.values["signup_surname"][0]}">
+                    </div>
+                    
                     <label for="signup_username">
                         Benutzername:
                         <span class="required">*</span>
