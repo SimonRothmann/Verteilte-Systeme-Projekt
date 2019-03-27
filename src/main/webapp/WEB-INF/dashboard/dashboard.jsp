@@ -15,16 +15,21 @@
 
     <jsp:attribute name="menu">
         <div class="menuitem">
-            <a href="<c:url value="/app/film/list/"/>">Liste</a>
+            <a href="<c:url value="/app/dashboard/"/>">Startseite</a>
+        </div>
+        
+        <div class="menuitem">
+            <a href="<c:url value="/app/films/list/"/>">Film-Liste</a>
         </div>
 
         <div class="menuitem">
-            <a href="<c:url value="/app/films/film/new/"/>">Status anlegen</a>
+            <a href="<c:url value="/app/films/film/new/"/>">Film anlegen</a>
         </div>
 
         <div class="menuitem">
             <a href="<c:url value="/app/films/genre/"/>">Genres bearbeiten</a>
         </div>
+        
     </jsp:attribute>
 
     <jsp:attribute name="content">

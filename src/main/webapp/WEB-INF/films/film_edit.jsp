@@ -26,7 +26,15 @@
         </div>
         
         <div class="menuitem">
-            <a href="<c:url value="/app/films/list/"/>">Liste</a>
+            <a href="<c:url value="/app/films/list/"/>">Film-Liste</a>
+        </div>
+
+        <div class="menuitem">
+            <a href="<c:url value="/app/films/film/new/"/>">Film anlegen</a>
+        </div>
+
+        <div class="menuitem">
+            <a href="<c:url value="/app/films/genre/"/>">Genres bearbeiten</a>
         </div>
     </jsp:attribute>
 

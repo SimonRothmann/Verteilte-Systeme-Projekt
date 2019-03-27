@@ -15,7 +15,7 @@
 
     <jsp:attribute name="menu">
         <div class="menuitem">
-            <a href="<c:url value="/logout/"/>">Versuchs nochmal!</a>
+            <a href="<c:url value="/logout/"/>">Versuchs' nochmal!</a>
         </div>
     </jsp:attribute>
 
