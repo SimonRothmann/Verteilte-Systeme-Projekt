@@ -32,7 +32,7 @@
         </div>
 
         <div class="menuitem">
-            <a href="<c:url value="/app/tasks/genre/"/>">Kategorien bearbeiten</a>
+            <a href="<c:url value="/app/tasks/genre/"/>">Genres bearbeiten</a>
         </div>
     </jsp:attribute>
 
