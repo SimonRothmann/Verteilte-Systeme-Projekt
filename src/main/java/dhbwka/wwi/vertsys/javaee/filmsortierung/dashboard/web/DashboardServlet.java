@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 public class DashboardServlet extends HttpServlet {
 
     // Kacheln für Aufgaben
-    @EJB(beanName = "tasks")
+    @EJB(beanName = "films")
     DashboardContentProvider taskContent;
 
     @Override
