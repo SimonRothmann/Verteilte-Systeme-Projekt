@@ -36,8 +36,9 @@ public class User implements Serializable {
     @Size(min = 5, max = 64, message = "Der Benutzername muss zwischen fünf und 64 Zeichen lang sein.")
     @NotNull(message = "Der Benutzername darf nicht leer sein.")
     private String username;
-    
+
     public class Password {
+
         @Size(min = 6, max = 64, message = "Das Passwort muss zwischen sechs und 64 Zeichen lang sein.")
         public String password = "";
     }
@@ -57,15 +58,16 @@ public class User implements Serializable {
     List<String> groups = new ArrayList<>();
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    List<Film> tasks = new ArrayList<>();
-    
-    @Column (name = "FORENAME", length = 100)
+    List<Film> films = new ArrayList<>();
+
+    @Column(name = "FORENAME", length = 100)
     @NotNull(message = "Der Vorname darf nicht leer sein.")
-    private String forename; 
-    
-    @Column (name = "SURNAME", length = 100)
+    private String forename;
+
+    @Column(name = "SURNAME", length = 100)
     @NotNull(message = "Der Nachname darf nicht leer sein.")
     private String surname;
+
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
     public User() {
     }
@@ -83,15 +85,19 @@ public class User implements Serializable {
     public String getForename() {
         return forename;
     }
+
     public void setForename(String forename) {
         this.forename = forename;
     }
+
     public String getSurname() {
         return surname;
     }
+
     public void setSurname(String surname) {
         this.surname = surname;
     }
+
     public String getUsername() {
         return username;
     }
@@ -100,12 +106,12 @@ public class User implements Serializable {
         this.username = id;
     }
 
-    public List<Film> getTasks() {
-        return tasks;
+    public List<Film> getFilms() {
+        return films;
     }
 
-    public void setTasks(List<Film> tasks) {
-        this.tasks = tasks;
+    public void setFilms(List<Film> films) {
+        this.films = films;
     }
     //</editor-fold>
 
@@ -148,10 +154,10 @@ public class User implements Serializable {
      * Berechnet einen Hashwert aus dem übergebenen Passwort und legt ihn im
      * Feld passwordHash ab. Somit wird das Passwort niemals als Klartext
      * gespeichert.
-     * 
+     *
      * Gleichzeitig wird das Passwort im nicht gespeicherten Feld password
-     * abgelegt, um durch die Bean Validation Annotationen überprüft werden
-     * zu können.
+     * abgelegt, um durch die Bean Validation Annotationen überprüft werden zu
+     * können.
      *
      * @param password Neues Passwort
      */
@@ -162,12 +168,13 @@ public class User implements Serializable {
 
     /**
      * Nur für die Validierung bei einer Passwortänderung!
+     *
      * @return Neues, beim Speichern gesetztes Passwort
      */
     public Password getPassword() {
         return this.password;
     }
-    
+
     /**
      * Prüft, ob das übergebene Passwort korrekt ist.
      *
