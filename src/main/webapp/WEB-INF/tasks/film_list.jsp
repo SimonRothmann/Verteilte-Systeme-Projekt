@@ -1,12 +1,3 @@
-<%-- 
-    Copyright © 2018 Dennis Schulmeister-Zimolong
-
-    E-Mail: dhbw@windows3.de
-    Webseite: https://www.wpvs.de/
-
-    Dieser Quellcode ist lizenziert unter einer
-    Creative Commons Namensnennung 4.0 International Lizenz.
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@taglib tagdir="/WEB-INF/tags/templates" prefix="template"%>
@@ -32,7 +23,7 @@
         </div>
 
         <div class="menuitem">
-            <a href="<c:url value="/app/films/genre/"/>">Kategorien bearbeiten</a>
+            <a href="<c:url value="/app/films/genre/"/>">Genres bearbeiten</a>
         </div>
     </jsp:attribute>
 
@@ -42,7 +33,7 @@
             <input type="text" name="search_text" value="${param.search_text}" placeholder="Beschreibung"/>
 
             <select name="search_genre">
-                <option value="">Alle Kategorien</option>
+                <option value="">Alle Genres</option>
 
                 <c:forEach items="${genres}" var="genre">
                     <option value="${genre.id}" ${param.search_genre == genre.id ? 'selected' : ''}>
@@ -70,7 +61,7 @@
         <c:choose>
             <c:when test="${empty films}">
                 <p>
-                    Es wurden keine Aufgaben gefunden. 🐈
+                    Es wurden noch keine Aufgaben erstellt. ❌
                 </p>
             </c:when>
             <c:otherwise>
@@ -80,7 +71,7 @@
                     <thead>
                         <tr>
                             <th>Bezeichnung</th>
-                            <th>Kategorie</th>
+                            <th>Genre</th>
                             <th>Eigentümer</th>
                             <th>Status</th>
                             <th>Fällig am</th>
