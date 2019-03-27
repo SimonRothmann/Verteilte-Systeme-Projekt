@@ -26,6 +26,7 @@ public class ApplicationConfig extends Application {
         Set<Class<?>> resources = new HashSet<>();
 
         resources.add(dhbwka.wwi.vertsys.javaee.filmsortierung.filme.rest.SucheFilmRest.class);
+        resources.add(dhbwka.wwi.vertsys.javaee.filmsortierung.filme.rest.SucheGenreRest.class);
 
         return resources;
     }
