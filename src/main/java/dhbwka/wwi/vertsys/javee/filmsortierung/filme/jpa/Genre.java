@@ -33,7 +33,7 @@ public class Genre implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "genre", fetch = FetchType.LAZY)
-    List<Task> tasks = new ArrayList<>();
+    List<Film> films = new ArrayList<>();
 
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
     public Genre() {
@@ -61,12 +61,12 @@ public class Genre implements Serializable {
         this.name = name;
     }
 
-    public List<Task> getTasks() {
-        return tasks;
+    public List<Film> getFilms() {
+        return films;
     }
 
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
+    public void setFilms(List<Film> films) {
+        this.films = films;
     }
     //</editor-fold>
 

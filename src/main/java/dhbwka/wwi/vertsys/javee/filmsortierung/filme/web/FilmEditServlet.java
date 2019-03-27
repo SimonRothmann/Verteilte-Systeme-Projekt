@@ -5,8 +5,8 @@ import dhbwka.wwi.vertsys.javaee.filmsortierung.common.web.FormValues;
 import dhbwka.wwi.vertsys.javaee.filmsortierung.common.ejb.UserBean;
 import dhbwka.wwi.vertsys.javaee.filmsortierung.common.ejb.ValidationBean;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.GenreBean;
-import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.TaskBean;
-import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Task;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.FilmBean;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Film;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.TaskStatus;
 import java.io.IOException;
 import java.sql.Date;
@@ -26,11 +26,11 @@ import javax.servlet.http.HttpSession;
 /**
  * Seite zum Anlegen oder Bearbeiten einer Aufgabe.
  */
-@WebServlet(urlPatterns = "/app/tasks/task/*")
-public class TaskEditServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/app/films/film/*")
+public class FilmEditServlet extends HttpServlet {
 
     @EJB
-    TaskBean taskBean;
+    FilmBean filmBean;
 
     @EJB
     GenreBean genreBean;
@@ -52,19 +52,19 @@ public class TaskEditServlet extends HttpServlet {
         // Zu bearbeitende Aufgabe einlesen
         HttpSession session = request.getSession();
 
-        Task task = this.getRequestedTask(request);
-        request.setAttribute("edit", task.getId() != 0);
+        Film film = this.getRequestedFilm(request);
+        request.setAttribute("edit", film.getId() != 0);
                                 
-        if (session.getAttribute("task_form") == null) {
+        if (session.getAttribute("film_form") == null) {
             // Keine Formulardaten mit fehlerhaften Daten in der Session,
             // daher Formulardaten aus dem Datenbankobjekt übernehmen
-            request.setAttribute("task_form", this.createTaskForm(task));
+            request.setAttribute("film_form", this.createFilmForm(film));
         }
 
         // Anfrage an die JSP weiterleiten
-        request.getRequestDispatcher("/WEB-INF/tasks/task_edit.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/films/film_edit.jsp").forward(request, response);
         
-        session.removeAttribute("task_form");
+        session.removeAttribute("film_form");
     }
 
     @Override
@@ -80,10 +80,10 @@ public class TaskEditServlet extends HttpServlet {
 
         switch (action) {
             case "save":
-                this.saveTask(request, response);
+                this.saveFilm(request, response);
                 break;
             case "delete":
-                this.deleteTask(request, response);
+                this.deleteFilm(request, response);
                 break;
         }
     }
@@ -96,64 +96,64 @@ public class TaskEditServlet extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    private void saveTask(HttpServletRequest request, HttpServletResponse response)
+    private void saveFilm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         // Formulareingaben prüfen
         List<String> errors = new ArrayList<>();
 
-        String taskGenre = request.getParameter("task_genre");
-        String taskDueDate = request.getParameter("task_due_date");
-        String taskDueTime = request.getParameter("task_due_time");
-        String taskStatus = request.getParameter("task_status");
-        String taskShortText = request.getParameter("task_short_text");
-        String taskLongText = request.getParameter("task_long_text");
+        String filmGenre = request.getParameter("film_genre");
+        String filmDueDate = request.getParameter("film_due_date");
+        String filmDueTime = request.getParameter("film_due_time");
+        String filmStatus = request.getParameter("film_status");
+        String filmShortText = request.getParameter("film_short_text");
+        String filmLongText = request.getParameter("film_long_text");
 
-        Task task = this.getRequestedTask(request);
+        Film film = this.getRequestedFilm(request);
 
-        if (taskGenre != null && !taskGenre.trim().isEmpty()) {
+        if (filmGenre != null && !filmGenre.trim().isEmpty()) {
             try {
-                task.setGenre(this.genreBean.findById(Long.parseLong(taskGenre)));
+                film.setGenre(this.genreBean.findById(Long.parseLong(filmGenre)));
             } catch (NumberFormatException ex) {
                 // Ungültige oder keine ID mitgegeben
             }
         }
 
-        Date dueDate = WebUtils.parseDate(taskDueDate);
-        Time dueTime = WebUtils.parseTime(taskDueTime);
+        Date dueDate = WebUtils.parseDate(filmDueDate);
+        Time dueTime = WebUtils.parseTime(filmDueTime);
 
         if (dueDate != null) {
-            task.setDueDate(dueDate);
+            film.setDueDate(dueDate);
         } else {
             errors.add("Das Datum muss dem Format dd.mm.yyyy entsprechen.");
         }
 
         if (dueTime != null) {
-            task.setDueTime(dueTime);
+            film.setDueTime(dueTime);
         } else {
             errors.add("Die Uhrzeit muss dem Format hh:mm:ss entsprechen.");
         }
 
         try {
-            task.setStatus(TaskStatus.valueOf(taskStatus));
+            film.setStatus(TaskStatus.valueOf(filmStatus));
         } catch (IllegalArgumentException ex) {
             errors.add("Der ausgewählte Status ist nicht vorhanden.");
         }
 
-        task.setShortText(taskShortText);
-        task.setLongText(taskLongText);
+        film.setShortText(filmShortText);
+        film.setLongText(filmLongText);
 
-        this.validationBean.validate(task, errors);
+        this.validationBean.validate(film, errors);
 
         // Datensatz speichern
         if (errors.isEmpty()) {
-            this.taskBean.update(task);
+            this.filmBean.update(film);
         }
 
         // Weiter zur nächsten Seite
         if (errors.isEmpty()) {
             // Keine Fehler: Startseite aufrufen
-            response.sendRedirect(WebUtils.appUrl(request, "/app/tasks/list/"));
+            response.sendRedirect(WebUtils.appUrl(request, "/app/films/list/"));
         } else {
             // Fehler: Formuler erneut anzeigen
             FormValues formValues = new FormValues();
@@ -161,7 +161,7 @@ public class TaskEditServlet extends HttpServlet {
             formValues.setErrors(errors);
 
             HttpSession session = request.getSession();
-            session.setAttribute("task_form", formValues);
+            session.setAttribute("film_form", formValues);
 
             response.sendRedirect(request.getRequestURI());
         }
@@ -175,15 +175,15 @@ public class TaskEditServlet extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    private void deleteTask(HttpServletRequest request, HttpServletResponse response)
+    private void deleteFilm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         // Datensatz löschen
-        Task task = this.getRequestedTask(request);
-        this.taskBean.delete(task);
+        Film film = this.getRequestedFilm(request);
+        this.filmBean.delete(film);
 
         // Zurück zur Übersicht
-        response.sendRedirect(WebUtils.appUrl(request, "/app/tasks/list/"));
+        response.sendRedirect(WebUtils.appUrl(request, "/app/films/list/"));
     }
 
     /**
@@ -194,34 +194,34 @@ public class TaskEditServlet extends HttpServlet {
      * @param request HTTP-Anfrage
      * @return Zu bearbeitende Aufgabe
      */
-    private Task getRequestedTask(HttpServletRequest request) {
+    private Film getRequestedFilm(HttpServletRequest request) {
         // Zunächst davon ausgehen, dass ein neuer Satz angelegt werden soll
-        Task task = new Task();
-        task.setOwner(this.userBean.getCurrentUser());
-        task.setDueDate(new Date(System.currentTimeMillis()));
-        task.setDueTime(new Time(System.currentTimeMillis()));
+        Film film = new Film();
+        film.setOwner(this.userBean.getCurrentUser());
+        film.setDueDate(new Date(System.currentTimeMillis()));
+        film.setDueTime(new Time(System.currentTimeMillis()));
 
         // ID aus der URL herausschneiden
-        String taskId = request.getPathInfo();
+        String filmId = request.getPathInfo();
 
-        if (taskId == null) {
-            taskId = "";
+        if (filmId == null) {
+            filmId = "";
         }
 
-        taskId = taskId.substring(1);
+        filmId = filmId.substring(1);
 
-        if (taskId.endsWith("/")) {
-            taskId = taskId.substring(0, taskId.length() - 1);
+        if (filmId.endsWith("/")) {
+            filmId = filmId.substring(0, filmId.length() - 1);
         }
 
         // Versuchen, den Datensatz mit der übergebenen ID zu finden
         try {
-            task = this.taskBean.findById(Long.parseLong(taskId));
+            film = this.filmBean.findById(Long.parseLong(filmId));
         } catch (NumberFormatException ex) {
             // Ungültige oder keine ID in der URL enthalten
         }
 
-        return task;
+        return film;
     }
 
     /**
@@ -231,40 +231,40 @@ public class TaskEditServlet extends HttpServlet {
      * Formular aus der Entity oder aus einer vorherigen Formulareingabe
      * stammen.
      *
-     * @param task Die zu bearbeitende Aufgabe
+     * @param film Die zu bearbeitende Aufgabe
      * @return Neues, gefülltes FormValues-Objekt
      */
-    private FormValues createTaskForm(Task task) {
+    private FormValues createFilmForm(Film film) {
         Map<String, String[]> values = new HashMap<>();
 
-        values.put("task_owner", new String[]{
-            task.getOwner().getUsername()
+        values.put("film_owner", new String[]{
+            film.getOwner().getUsername()
         });
 
-        if (task.getGenre() != null) {
-            values.put("task_genre", new String[]{
-                "" + task.getGenre().getId()
+        if (film.getGenre() != null) {
+            values.put("film_genre", new String[]{
+                "" + film.getGenre().getId()
             });
         }
 
-        values.put("task_due_date", new String[]{
-            WebUtils.formatDate(task.getDueDate())
+        values.put("film_due_date", new String[]{
+            WebUtils.formatDate(film.getDueDate())
         });
 
-        values.put("task_due_time", new String[]{
-            WebUtils.formatTime(task.getDueTime())
+        values.put("film_due_time", new String[]{
+            WebUtils.formatTime(film.getDueTime())
         });
 
-        values.put("task_status", new String[]{
-            task.getStatus().toString()
+        values.put("film_status", new String[]{
+            film.getStatus().toString()
         });
 
-        values.put("task_short_text", new String[]{
-            task.getShortText()
+        values.put("film_short_text", new String[]{
+            film.getShortText()
         });
 
-        values.put("task_long_text", new String[]{
-            task.getLongText()
+        values.put("film_long_text", new String[]{
+            film.getLongText()
         });
 
         FormValues formValues = new FormValues();

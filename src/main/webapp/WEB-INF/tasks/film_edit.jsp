@@ -26,7 +26,7 @@
     </jsp:attribute>
 
     <jsp:attribute name="head">
-        <link rel="stylesheet" href="<c:url value="/css/task_edit.css"/>" />
+        <link rel="stylesheet" href="<c:url value="/css/film_edit.css"/>" />
     </jsp:attribute>
 
     <jsp:attribute name="menu">
@@ -35,7 +35,7 @@
         </div>
         
         <div class="menuitem">
-            <a href="<c:url value="/app/tasks/list/"/>">Liste</a>
+            <a href="<c:url value="/app/films/list/"/>">Liste</a>
         </div>
     </jsp:attribute>
 
@@ -46,60 +46,60 @@
                 <input type="hidden" name="csrf_token" value="${csrf_token}">
 
                 <%-- Eingabefelder --%>
-                <label for="task_owner">Eigentümer:</label>
+                <label for="film_owner">Eigentümer:</label>
                 <div class="side-by-side">
-                    <input type="text" name="task_owner" value="${task_form.values["task_owner"][0]}" readonly="readonly">
+                    <input type="text" name="film_owner" value="${film_form.values["film_owner"][0]}" readonly="readonly">
                 </div>
 
-                <label for="task_genre">Genre:</label>
+                <label for="film_genre">Genre:</label>
                 <div class="side-by-side">
-                    <select name="task_genre">
+                    <select name="film_genre">
                         <option value="">Keine Kategorie</option>
 
                         <c:forEach items="${genres}" var="genre">
-                            <option value="${genre.id}" ${task_form.values["task_genre"][0] == genre.id.toString() ? 'selected' : ''}>
+                            <option value="${genre.id}" ${film_form.values["film_genre"][0] == genre.id.toString() ? 'selected' : ''}>
                                 <c:out value="${genre.name}" />
                             </option>
                         </c:forEach>
                     </select>
                 </div>
 
-                <label for="task_due_date">
+                <label for="film_due_date">
                     Fällig am:
                     <span class="required">*</span>
                 </label>
                 <div class="side-by-side">
-                    <input type="text" name="task_due_date" value="${task_form.values["task_due_date"][0]}">
-                    <input type="text" name="task_due_time" value="${task_form.values["task_due_time"][0]}">
+                    <input type="text" name="film_due_date" value="${film_form.values["film_due_date"][0]}">
+                    <input type="text" name="film_due_time" value="${film_form.values["film_due_time"][0]}">
                 </div>
 
-                <label for="task_status">
+                <label for="film_status">
                     Status:
                     <span class="required">*</span>
                 </label>
                 <div class="side-by-side margin">
-                    <select name="task_status">
+                    <select name="film_status">
                         <c:forEach items="${statuses}" var="status">
-                            <option value="${status}" ${task_form.values["task_status"][0] == status ? 'selected' : ''}>
+                            <option value="${status}" ${film_form.values["film_status"][0] == status ? 'selected' : ''}>
                                 <c:out value="${status.label}"/>
                             </option>
                         </c:forEach>
                     </select>
                 </div>
 
-                <label for="task_short_text">
+                <label for="film_short_text">
                     Bezeichnung:
                     <span class="required">*</span>
                 </label>
                 <div class="side-by-side">
-                    <input type="text" name="task_short_text" value="${task_form.values["task_short_text"][0]}">
+                    <input type="text" name="film_short_text" value="${film_form.values["film_short_text"][0]}">
                 </div>
 
-                <label for="task_long_text">
+                <label for="film_long_text">
                     Beschreibung:
                 </label>
                 <div class="side-by-side">
-                    <textarea name="task_long_text"><c:out value="${task_form.values['task_long_text'][0]}"/></textarea>
+                    <textarea name="film_long_text"><c:out value="${film_form.values['film_long_text'][0]}"/></textarea>
                 </div>
 
                 <%-- Button zum Abschicken --%>
@@ -117,9 +117,9 @@
             </div>
 
             <%-- Fehlermeldungen --%>
-            <c:if test="${!empty task_form.errors}">
+            <c:if test="${!empty film_form.errors}">
                 <ul class="errors">
-                    <c:forEach items="${task_form.errors}" var="error">
+                    <c:forEach items="${film_form.errors}" var="error">
                         <li>${error}</li>
                     </c:forEach>
                 </ul>

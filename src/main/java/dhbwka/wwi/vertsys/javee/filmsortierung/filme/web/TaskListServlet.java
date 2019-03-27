@@ -5,9 +5,9 @@ package dhbwka.wwi.vertsys.javee.filmsortierung.filme.web;
  * @author simon
  */
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.GenreBean;
-import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.TaskBean;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.FilmBean;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Genre;
-import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Task;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Film;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.TaskStatus;
 import java.io.IOException;
 import java.util.List;
@@ -21,14 +21,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet für die tabellarische Auflisten der Aufgaben.
  */
-@WebServlet(urlPatterns = {"/app/tasks/list/"})
+@WebServlet(urlPatterns = {"/app/films/list/"})
 public class TaskListServlet extends HttpServlet {
 
     @EJB
     private GenreBean genreBean;
 
     @EJB
-    private TaskBean taskBean;
+    private FilmBean filmBean;
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -64,10 +64,10 @@ public class TaskListServlet extends HttpServlet {
 
         }
 
-        List<Task> tasks = this.taskBean.search(searchText, genre, status);
-        request.setAttribute("tasks", tasks);
+        List<Film> films = this.filmBean.search(searchText, genre, status);
+        request.setAttribute("films", films);
 
         // Anfrage an die JSP weiterleiten
-        request.getRequestDispatcher("/WEB-INF/tasks/task_list.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/films/film_list.jsp").forward(request, response);
     }
 }

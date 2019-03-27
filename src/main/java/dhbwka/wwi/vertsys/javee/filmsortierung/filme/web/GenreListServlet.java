@@ -3,9 +3,9 @@ package dhbwka.wwi.vertsys.javee.filmsortierung.filme.web;
 import dhbwka.wwi.vertsys.javaee.filmsortierung.common.web.FormValues;
 import dhbwka.wwi.vertsys.javaee.filmsortierung.common.ejb.ValidationBean;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.GenreBean;
-import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.TaskBean;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.FilmBean;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Genre;
-import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Task;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Film;
 import java.io.IOException;
 import java.util.List;
 import javax.ejb.EJB;
@@ -22,14 +22,14 @@ import javax.servlet.http.HttpSession;
  * Formular, mit dem ein neue Kategorie angelegt werden kann, sowie eine Liste,
  * die zum Löschen der Kategorien verwendet werden kann.
  */
-@WebServlet(urlPatterns = {"/app/tasks/genre/"})
+@WebServlet(urlPatterns = {"/app/films/genre/"})
 public class GenreListServlet extends HttpServlet {
 
     @EJB
     GenreBean genreBean;
 
     @EJB
-    TaskBean taskBean;
+    FilmBean filmBean;
 
     @EJB
     ValidationBean validationBean;
@@ -42,7 +42,7 @@ public class GenreListServlet extends HttpServlet {
         request.setAttribute("genres", this.genreBean.findAllSorted());
 
         // Anfrage an dazugerhörige JSP weiterleiten
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/tasks/genre_list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/films/genre_list.jsp");
         dispatcher.forward(request, response);
 
         // Alte Formulardaten aus der Session entfernen
@@ -140,12 +140,12 @@ public class GenreListServlet extends HttpServlet {
             }
 
             // Bei allen betroffenen Aufgaben, den Bezug zur Kategorie aufheben
-            List<Task> tasks = genre.getTasks();
+            List<Film> films = genre.getFilms();
 
-            if (tasks != null) {
-                tasks.forEach((Task task) -> {
-                    task.setGenre(null);
-                    this.taskBean.update(task);
+            if (films != null) {
+                films.forEach((Film film) -> {
+                    film.setGenre(null);
+                    this.filmBean.update(film);
                 });
             }
 

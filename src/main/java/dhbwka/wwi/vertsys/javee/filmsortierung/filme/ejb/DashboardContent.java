@@ -14,14 +14,14 @@ import javax.ejb.Stateless;
 /**
  * EJB zur Definition der Dashboard-Kacheln für Aufgaben.
  */
-@Stateless(name = "tasks")
+@Stateless(name = "films")
 public class DashboardContent implements DashboardContentProvider {
 
     @EJB
     private GenreBean genreBean;
 
     @EJB
-    private TaskBean taskBean;
+    private FilmBean filmBean;
 
     /**
      * Vom Dashboard aufgerufenen Methode, um die anzuzeigenden Rubriken und
@@ -118,8 +118,8 @@ public class DashboardContent implements DashboardContentProvider {
      * @return
      */
     private DashboardTile createTile(Genre genre, TaskStatus status, String label, String cssClass, String icon) {
-        int amount = taskBean.search(null, genre, status).size();
-        String href = "/app/tasks/list/";
+        int amount = filmBean.search(null, genre, status).size();
+        String href = "/app/films/list/";
 
         if (genre != null) {
             href = WebUtils.addQueryParameter(href, "search_genre", "" + genre.getId());

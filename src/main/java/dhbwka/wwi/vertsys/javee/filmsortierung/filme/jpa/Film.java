@@ -21,13 +21,13 @@ import javax.validation.constraints.Size;
  * Eine zu erledigende Aufgabe.
  */
 @Entity
-public class Task implements Serializable {
+public class Film implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "task_ids")
-    @TableGenerator(name = "task_ids", initialValue = 0, allocationSize = 50)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "film_ids")
+    @TableGenerator(name = "film_ids", initialValue = 0, allocationSize = 50)
     private long id;
 
     @ManyToOne
@@ -57,10 +57,10 @@ public class Task implements Serializable {
     private TaskStatus status = TaskStatus.OPEN;
 
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
-    public Task() {
+    public Film() {
     }
 
-    public Task(User owner, Genre genre, String shortText, String longText, Date dueDate, Time dueTime) {
+    public Film(User owner, Genre genre, String shortText, String longText, Date dueDate, Time dueTime) {
         this.owner = owner;
         this.genre = genre;
         this.shortText = shortText;
