@@ -1,9 +1,9 @@
 /*
  * Copyright © 2018 Dennis Schulmeister-Zimolong
- * 
+ *
  * E-Mail: dhbw@windows3.de
  * Webseite: https://www.wpvs.de/
- * 
+ *
  * Dieser Quellcode ist lizenziert unter einer
  * Creative Commons Namensnennung 4.0 International Lizenz.
  */
@@ -25,7 +25,7 @@ public class UserBean {
 
     @PersistenceContext
     EntityManager em;
-    
+
     @Resource
     EJBContext ctx;
 
@@ -40,6 +40,8 @@ public class UserBean {
 
     /**
      *
+     * @param forename
+     * @param surname
      * @param username
      * @param password
      * @throws UserBean.UserAlreadyExistsException
@@ -56,6 +58,7 @@ public class UserBean {
 
     /**
      * Passwort ändern (ohne zu speichern)
+     *
      * @param user
      * @param oldPassword
      * @param newPassword
@@ -69,18 +72,20 @@ public class UserBean {
 
         user.setPassword(newPassword);
     }
-    
+
     /**
      * Benutzer löschen
+     *
      * @param user Zu löschender Benutzer
      */
     @RolesAllowed("app-user")
     public void delete(User user) {
         this.em.remove(user);
     }
-    
+
     /**
      * Benutzer aktualisieren
+     *
      * @param user Zu aktualisierender Benutzer
      * @return Gespeicherter Benutzer
      */
