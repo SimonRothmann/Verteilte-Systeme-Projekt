@@ -3,7 +3,7 @@ package dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb;
 import dhbwka.wwi.vertsys.javaee.filmsortierung.common.ejb.EntityBean;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Genre;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Film;
-import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.TaskStatus;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.FilmStatus;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
@@ -45,7 +45,7 @@ public class FilmBean extends EntityBean<Film, Long> {
      * @param status Status (optional)
      * @return Liste mit den gefundenen Aufgaben
      */
-    public List<Film> search(String search, Genre genre, TaskStatus status) {
+    public List<Film> search(String search, Genre genre, FilmStatus status) {
         // Hilfsobjekt zum Bauen des Query
         CriteriaBuilder cb = this.em.getCriteriaBuilder();
         

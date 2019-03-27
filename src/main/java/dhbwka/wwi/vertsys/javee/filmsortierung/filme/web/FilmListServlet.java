@@ -8,7 +8,7 @@ import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.GenreBean;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.FilmBean;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Genre;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Film;
-import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.TaskStatus;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.FilmStatus;
 import java.io.IOException;
 import java.util.List;
 import javax.ejb.EJB;
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet für die tabellarische Auflisten der Aufgaben.
  */
 @WebServlet(urlPatterns = {"/app/films/list/"})
-public class TaskListServlet extends HttpServlet {
+public class FilmListServlet extends HttpServlet {
 
     @EJB
     private GenreBean genreBean;
@@ -36,7 +36,7 @@ public class TaskListServlet extends HttpServlet {
 
         // Verfügbare Kategorien und Stati für die Suchfelder ermitteln
         request.setAttribute("genres", this.genreBean.findAllSorted());
-        request.setAttribute("statuses", TaskStatus.values());
+        request.setAttribute("statuses", FilmStatus.values());
 
         // Suchparameter aus der URL auslesen
         String searchText = request.getParameter("search_text");
@@ -45,7 +45,7 @@ public class TaskListServlet extends HttpServlet {
 
         // Anzuzeigende Aufgaben suchen
         Genre genre = null;
-        TaskStatus status = null;
+        FilmStatus status = null;
 
         if (searchGenre != null) {
             try {
@@ -57,7 +57,7 @@ public class TaskListServlet extends HttpServlet {
 
         if (searchStatus != null) {
             try {
-                status = TaskStatus.valueOf(searchStatus);
+                status = FilmStatus.valueOf(searchStatus);
             } catch (IllegalArgumentException ex) {
                 status = null;
             }

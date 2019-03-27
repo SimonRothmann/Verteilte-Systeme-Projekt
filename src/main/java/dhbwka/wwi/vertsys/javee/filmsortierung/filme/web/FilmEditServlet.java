@@ -7,7 +7,7 @@ import dhbwka.wwi.vertsys.javaee.filmsortierung.common.ejb.ValidationBean;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.GenreBean;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.FilmBean;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Film;
-import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.TaskStatus;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.FilmStatus;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
@@ -47,7 +47,7 @@ public class FilmEditServlet extends HttpServlet {
 
         // Verfügbare Kategorien und Stati für die Suchfelder ermitteln
         request.setAttribute("genres", this.genreBean.findAllSorted());
-        request.setAttribute("statuses", TaskStatus.values());
+        request.setAttribute("statuses", FilmStatus.values());
 
         // Zu bearbeitende Aufgabe einlesen
         HttpSession session = request.getSession();
@@ -135,7 +135,7 @@ public class FilmEditServlet extends HttpServlet {
         }
 
         try {
-            film.setStatus(TaskStatus.valueOf(filmStatus));
+            film.setStatus(FilmStatus.valueOf(filmStatus));
         } catch (IllegalArgumentException ex) {
             errors.add("Der ausgewählte Status ist nicht vorhanden.");
         }

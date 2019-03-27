@@ -1,6 +1,6 @@
 package dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa;
 
-public enum TaskStatus {
+public enum FilmStatus {
     OPEN, IN_PROGRESS, FINISHED, CANCELED, POSTPONED;
 
     /**
@@ -11,15 +11,15 @@ public enum TaskStatus {
     public String getLabel() {
         switch (this) {
             case OPEN:
-                return "Offen";
+                return "Noch nicht gesehen";
             case IN_PROGRESS:
-                return "In Bearbeitung";
+                return "Am schauen";
             case FINISHED:
-                return "Erledigt";
+                return "Gesehen";
             case CANCELED:
-                return "Abgebrochen";
+                return "Interessiert mich nicht";
             case POSTPONED:
-                return "Zurückgestellt";
+                return "Möchte ich noch sehen";
             default:
                 return this.toString();
         }

@@ -5,8 +5,8 @@ import dhbwka.wwi.vertsys.javaee.filmsortierung.dashboard.ejb.DashboardContentPr
 import dhbwka.wwi.vertsys.javaee.filmsortierung.dashboard.ejb.DashboardSection;
 import dhbwka.wwi.vertsys.javaee.filmsortierung.dashboard.ejb.DashboardTile;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Genre;
-import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.TaskStatus;
-import static dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.TaskStatus.*;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.FilmStatus;
+import static dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.FilmStatus.*;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -75,7 +75,7 @@ public class DashboardContent implements DashboardContentProvider {
         section.getTiles().add(tile);
 
         // Ja Aufgabenstatus eine weitere Kachel erzeugen
-        for (TaskStatus status : TaskStatus.values()) {
+        for (FilmStatus status : FilmStatus.values()) {
             String cssClass1 = cssClass + " status-" + status.toString().toLowerCase();
             String icon = "";
 
@@ -117,7 +117,7 @@ public class DashboardContent implements DashboardContentProvider {
      * @param icon
      * @return
      */
-    private DashboardTile createTile(Genre genre, TaskStatus status, String label, String cssClass, String icon) {
+    private DashboardTile createTile(Genre genre, FilmStatus status, String label, String cssClass, String icon) {
         int amount = filmBean.search(null, genre, status).size();
         String href = "/app/films/list/";
 

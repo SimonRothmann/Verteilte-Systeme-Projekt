@@ -54,7 +54,7 @@ public class Film implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @NotNull
-    private TaskStatus status = TaskStatus.OPEN;
+    private FilmStatus status = FilmStatus.OPEN;
 
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
     public Film() {
@@ -127,11 +127,11 @@ public class Film implements Serializable {
         this.dueTime = dueTime;
     }
 
-    public TaskStatus getStatus() {
+    public FilmStatus getStatus() {
         return status;
     }
 
-    public void setStatus(TaskStatus status) {
+    public void setStatus(FilmStatus status) {
         this.status = status;
     }
     //</editor-fold>
