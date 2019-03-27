@@ -1,22 +1,13 @@
-/*
- * Copyright © 2019 Dennis Schulmeister-Zimolong
- * 
- * E-Mail: dhbw@windows3.de
- * Webseite: https://www.wpvs.de/
- * 
- * Dieser Quellcode ist lizenziert unter einer
- * Creative Commons Namensnennung 4.0 International Lizenz.
- */
 package dhbwka.wwi.vertsys.javee.filmsortierung.filme.web;
 
 import dhbwka.wwi.vertsys.javaee.filmsortierung.common.web.WebUtils;
 import dhbwka.wwi.vertsys.javaee.filmsortierung.common.web.FormValues;
-import dhbwka.wwi.vertsys.javaee.filmsortierung.tasks.ejb.CategoryBean;
-import dhbwka.wwi.vertsys.javaee.filmsortierung.tasks.ejb.TaskBean;
 import dhbwka.wwi.vertsys.javaee.filmsortierung.common.ejb.UserBean;
 import dhbwka.wwi.vertsys.javaee.filmsortierung.common.ejb.ValidationBean;
-import dhbwka.wwi.vertsys.javaee.filmsortierung.tasks.jpa.Task;
-import dhbwka.wwi.vertsys.javaee.filmsortierung.tasks.jpa.TaskStatus;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.GenreBean;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.TaskBean;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Task;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.TaskStatus;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
@@ -42,7 +33,7 @@ public class TaskEditServlet extends HttpServlet {
     TaskBean taskBean;
 
     @EJB
-    CategoryBean categoryBean;
+    GenreBean genreBean;
 
     @EJB
     UserBean userBean;
@@ -55,7 +46,7 @@ public class TaskEditServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // Verfügbare Kategorien und Stati für die Suchfelder ermitteln
-        request.setAttribute("categories", this.categoryBean.findAllSorted());
+        request.setAttribute("genres", this.genreBean.findAllSorted());
         request.setAttribute("statuses", TaskStatus.values());
 
         // Zu bearbeitende Aufgabe einlesen
@@ -111,7 +102,7 @@ public class TaskEditServlet extends HttpServlet {
         // Formulareingaben prüfen
         List<String> errors = new ArrayList<>();
 
-        String taskCategory = request.getParameter("task_category");
+        String taskGenre = request.getParameter("task_genre");
         String taskDueDate = request.getParameter("task_due_date");
         String taskDueTime = request.getParameter("task_due_time");
         String taskStatus = request.getParameter("task_status");
@@ -120,9 +111,9 @@ public class TaskEditServlet extends HttpServlet {
 
         Task task = this.getRequestedTask(request);
 
-        if (taskCategory != null && !taskCategory.trim().isEmpty()) {
+        if (taskGenre != null && !taskGenre.trim().isEmpty()) {
             try {
-                task.setCategory(this.categoryBean.findById(Long.parseLong(taskCategory)));
+                task.setGenre(this.genreBean.findById(Long.parseLong(taskGenre)));
             } catch (NumberFormatException ex) {
                 // Ungültige oder keine ID mitgegeben
             }
@@ -250,9 +241,9 @@ public class TaskEditServlet extends HttpServlet {
             task.getOwner().getUsername()
         });
 
-        if (task.getCategory() != null) {
-            values.put("task_category", new String[]{
-                "" + task.getCategory().getId()
+        if (task.getGenre() != null) {
+            values.put("task_genre", new String[]{
+                "" + task.getGenre().getId()
             });
         }
 

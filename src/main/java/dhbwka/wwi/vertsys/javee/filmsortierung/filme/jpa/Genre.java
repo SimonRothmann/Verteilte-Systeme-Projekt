@@ -23,23 +23,23 @@ public class Genre implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "category_ids")
-    @TableGenerator(name = "category_ids", initialValue = 0, allocationSize = 50)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "genre_ids")
+    @TableGenerator(name = "genre_ids", initialValue = 0, allocationSize = 50)
     private long id;
 
     @Column(length = 30)
     @NotNull(message = "Der Name darf nicht leer sein.")
-    @Size(min = 3, max = 30, message = "Der Name muss zwischen drei und 30 Zeichen lang sein.")
+    @Size(min = 3, max = 30, message = "Wer zu doof ist, seinen Namen auszuschreiben, sollte es bleiben lassen.")
     private String name;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "genre", fetch = FetchType.LAZY)
     List<Task> tasks = new ArrayList<>();
 
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
-    public Category() {
+    public Genre() {
     }
 
-    public Category(String name) {
+    public Genre(String name) {
         this.name = name;
     }
     //</editor-fold>

@@ -1,15 +1,6 @@
-/*
- * Copyright © 2018 Dennis Schulmeister-Zimolong
- * 
- * E-Mail: dhbw@windows3.de
- * Webseite: https://www.wpvs.de/
- * 
- * Dieser Quellcode ist lizenziert unter einer
- * Creative Commons Namensnennung 4.0 International Lizenz.
- */
 package dhbwka.wwi.vertsys.javaee.filmsortierung.common.jpa;
 
-import dhbwka.wwi.vertsys.javaee.filmsortierung.tasks.jpa.Task;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Task;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

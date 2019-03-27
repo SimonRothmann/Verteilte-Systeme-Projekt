@@ -1,17 +1,6 @@
-/*
- * Copyright © 2019 Dennis Schulmeister-Zimolong
- * 
- * E-Mail: dhbw@windows3.de
- * Webseite: https://www.wpvs.de/
- * 
- * Dieser Quellcode ist lizenziert unter einer
- * Creative Commons Namensnennung 4.0 International Lizenz.
- */
 package dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa;
 
 import dhbwka.wwi.vertsys.javaee.filmsortierung.common.jpa.User;
-import dhbwka.wwi.vertsys.javaee.filmsortierung.tasks.jpa.Category;
-import dhbwka.wwi.vertsys.javaee.filmsortierung.tasks.jpa.TaskStatus;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
@@ -46,7 +35,7 @@ public class Task implements Serializable {
     private User owner;
 
     @ManyToOne
-    private Category category;
+    private Genre genre;
 
     @Column(length = 50)
     @NotNull(message = "Die Bezeichnung darf nicht leer sein.")
@@ -71,9 +60,9 @@ public class Task implements Serializable {
     public Task() {
     }
 
-    public Task(User owner, Category category, String shortText, String longText, Date dueDate, Time dueTime) {
+    public Task(User owner, Genre genre, String shortText, String longText, Date dueDate, Time dueTime) {
         this.owner = owner;
-        this.category = category;
+        this.genre = genre;
         this.shortText = shortText;
         this.longText = longText;
         this.dueDate = dueDate;
@@ -98,12 +87,12 @@ public class Task implements Serializable {
         this.owner = owner;
     }
 
-    public Category getCategory() {
-        return category;
+    public Genre getGenre() {
+        return genre;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     public String getShortText() {

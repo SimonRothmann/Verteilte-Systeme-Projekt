@@ -1,11 +1,11 @@
 package dhbwka.wwi.vertsys.javee.filmsortierung.filme.web;
 
 import dhbwka.wwi.vertsys.javaee.filmsortierung.common.web.FormValues;
-import dhbwka.wwi.vertsys.javaee.filmsortierung.tasks.ejb.CategoryBean;
-import dhbwka.wwi.vertsys.javaee.filmsortierung.tasks.ejb.TaskBean;
 import dhbwka.wwi.vertsys.javaee.filmsortierung.common.ejb.ValidationBean;
-import dhbwka.wwi.vertsys.javaee.filmsortierung.tasks.jpa.Category;
-import dhbwka.wwi.vertsys.javaee.filmsortierung.tasks.jpa.Task;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.GenreBean;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.TaskBean;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Genre;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Task;
 import java.io.IOException;
 import java.util.List;
 import javax.ejb.EJB;
@@ -22,11 +22,11 @@ import javax.servlet.http.HttpSession;
  * Formular, mit dem ein neue Kategorie angelegt werden kann, sowie eine Liste,
  * die zum Löschen der Kategorien verwendet werden kann.
  */
-@WebServlet(urlPatterns = {"/app/tasks/categories/"})
+@WebServlet(urlPatterns = {"/app/tasks/genre/"})
 public class GenreListServlet extends HttpServlet {
 
     @EJB
-    CategoryBean categoryBean;
+    GenreBean genreBean;
 
     @EJB
     TaskBean taskBean;
@@ -39,15 +39,15 @@ public class GenreListServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // Alle vorhandenen Kategorien ermitteln
-        request.setAttribute("categories", this.categoryBean.findAllSorted());
+        request.setAttribute("genres", this.genreBean.findAllSorted());
 
         // Anfrage an dazugerhörige JSP weiterleiten
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/tasks/category_list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/tasks/genre_list.jsp");
         dispatcher.forward(request, response);
 
         // Alte Formulardaten aus der Session entfernen
         HttpSession session = request.getSession();
-        session.removeAttribute("categories_form");
+        session.removeAttribute("genres_form");
     }
 
     @Override
@@ -63,10 +63,10 @@ public class GenreListServlet extends HttpServlet {
 
         switch (action) {
             case "create":
-                this.createCategory(request, response);
+                this.createGenre(request, response);
                 break;
             case "delete":
-                this.deleteCategories(request, response);
+                this.deleteGenres(request, response);
                 break;
         }
     }
@@ -79,18 +79,18 @@ public class GenreListServlet extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    private void createCategory(HttpServletRequest request, HttpServletResponse response)
+    private void createGenre(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         // Formulareingaben prüfen
         String name = request.getParameter("name");
 
-        Category category = new Category(name);
-        List<String> errors = this.validationBean.validate(category);
+        Genre genre = new Genre(name);
+        List<String> errors = this.validationBean.validate(genre);
 
         // Neue Kategorie anlegen
         if (errors.isEmpty()) {
-            this.categoryBean.saveNew(category);
+            this.genreBean.saveNew(genre);
         }
 
         // Browser auffordern, die Seite neuzuladen
@@ -100,7 +100,7 @@ public class GenreListServlet extends HttpServlet {
             formValues.setErrors(errors);
 
             HttpSession session = request.getSession();
-            session.setAttribute("categories_form", formValues);
+            session.setAttribute("genres_form", formValues);
         }
 
         response.sendRedirect(request.getRequestURI());
@@ -114,43 +114,43 @@ public class GenreListServlet extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    private void deleteCategories(HttpServletRequest request, HttpServletResponse response)
+    private void deleteGenres(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         // Markierte Kategorie IDs auslesen
-        String[] categoryIds = request.getParameterValues("category");
+        String[] genreIds = request.getParameterValues("genre");
 
-        if (categoryIds == null) {
-            categoryIds = new String[0];
+        if (genreIds == null) {
+            genreIds = new String[0];
         }
 
         // Kategorien löschen
-        for (String categoryId : categoryIds) {
+        for (String genreId : genreIds) {
             // Zu löschende Kategorie ermitteln
-            Category category;
+            Genre genre;
 
             try {
-                category = this.categoryBean.findById(Long.parseLong(categoryId));
+                genre = this.genreBean.findById(Long.parseLong(genreId));
             } catch (NumberFormatException ex) {
                 continue;
             }
 
-            if (category == null) {
+            if (genre == null) {
                 continue;
             }
 
             // Bei allen betroffenen Aufgaben, den Bezug zur Kategorie aufheben
-            List<Task> tasks = category.getTasks();
+            List<Task> tasks = genre.getTasks();
 
             if (tasks != null) {
                 tasks.forEach((Task task) -> {
-                    task.setCategory(null);
+                    task.setGenre(null);
                     this.taskBean.update(task);
                 });
             }
 
             // Und weg damit
-            this.categoryBean.delete(category);
+            this.genreBean.delete(genre);
         }
 
         // Browser auffordern, die Seite neuzuladen

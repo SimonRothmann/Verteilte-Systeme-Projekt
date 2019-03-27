@@ -1,9 +1,9 @@
 package dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb;
 
 import dhbwka.wwi.vertsys.javaee.filmsortierung.common.ejb.EntityBean;
-import dhbwka.wwi.vertsys.javaee.filmsortierung.tasks.jpa.Category;
-import dhbwka.wwi.vertsys.javaee.filmsortierung.tasks.jpa.Task;
-import dhbwka.wwi.vertsys.javaee.filmsortierung.tasks.jpa.TaskStatus;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Genre;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Task;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.TaskStatus;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
@@ -41,11 +41,11 @@ public class TaskBean extends EntityBean<Task, Long> {
      * mit der CriteriaBuilder-API vollkommen dynamisch erzeugt.
      * 
      * @param search In der Kurzbeschreibung enthaltener Text (optional)
-     * @param category Kategorie (optional)
+     * @param genre Kategorie (optional)
      * @param status Status (optional)
      * @return Liste mit den gefundenen Aufgaben
      */
-    public List<Task> search(String search, Category category, TaskStatus status) {
+    public List<Task> search(String search, Genre genre, TaskStatus status) {
         // Hilfsobjekt zum Bauen des Query
         CriteriaBuilder cb = this.em.getCriteriaBuilder();
         
@@ -65,9 +65,9 @@ public class TaskBean extends EntityBean<Task, Long> {
             query.where(p);
         }
         
-        // WHERE t.category = :category
-        if (category != null) {
-            p = cb.and(p, cb.equal(from.get("category"), category));
+        // WHERE t.genre = :genre
+        if (genre != null) {
+            p = cb.and(p, cb.equal(from.get("genre"), genre));
             query.where(p);
         }
         

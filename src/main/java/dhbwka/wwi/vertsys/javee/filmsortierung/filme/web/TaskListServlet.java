@@ -1,23 +1,14 @@
-/*
- * Copyright © 2019 Dennis Schulmeister-Zimolong
- *
- * E-Mail: dhbw@windows3.de
- * Webseite: https://www.wpvs.de/
- *
- * Dieser Quellcode ist lizenziert unter einer
- * Creative Commons Namensnennung 4.0 International Lizenz.
- */
 package dhbwka.wwi.vertsys.javee.filmsortierung.filme.web;
 
 /**
  *
  * @author simon
  */
-import dhbwka.wwi.vertsys.javaee.filmsortierung.tasks.ejb.CategoryBean;
-import dhbwka.wwi.vertsys.javaee.filmsortierung.tasks.ejb.TaskBean;
-import dhbwka.wwi.vertsys.javaee.filmsortierung.tasks.jpa.Category;
-import dhbwka.wwi.vertsys.javaee.filmsortierung.tasks.jpa.Task;
-import dhbwka.wwi.vertsys.javaee.filmsortierung.tasks.jpa.TaskStatus;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.GenreBean;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.TaskBean;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Genre;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Task;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.TaskStatus;
 import java.io.IOException;
 import java.util.List;
 import javax.ejb.EJB;
@@ -34,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 public class TaskListServlet extends HttpServlet {
 
     @EJB
-    private CategoryBean categoryBean;
+    private GenreBean genreBean;
 
     @EJB
     private TaskBean taskBean;
@@ -44,23 +35,23 @@ public class TaskListServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // Verfügbare Kategorien und Stati für die Suchfelder ermitteln
-        request.setAttribute("categories", this.categoryBean.findAllSorted());
+        request.setAttribute("genres", this.genreBean.findAllSorted());
         request.setAttribute("statuses", TaskStatus.values());
 
         // Suchparameter aus der URL auslesen
         String searchText = request.getParameter("search_text");
-        String searchCategory = request.getParameter("search_category");
+        String searchGenre = request.getParameter("search_genre");
         String searchStatus = request.getParameter("search_status");
 
         // Anzuzeigende Aufgaben suchen
-        Category category = null;
+        Genre genre = null;
         TaskStatus status = null;
 
-        if (searchCategory != null) {
+        if (searchGenre != null) {
             try {
-                category = this.categoryBean.findById(Long.parseLong(searchCategory));
+                genre = this.genreBean.findById(Long.parseLong(searchGenre));
             } catch (NumberFormatException ex) {
-                category = null;
+                genre = null;
             }
         }
 
@@ -73,7 +64,7 @@ public class TaskListServlet extends HttpServlet {
 
         }
 
-        List<Task> tasks = this.taskBean.search(searchText, category, status);
+        List<Task> tasks = this.taskBean.search(searchText, genre, status);
         request.setAttribute("tasks", tasks);
 
         // Anfrage an die JSP weiterleiten

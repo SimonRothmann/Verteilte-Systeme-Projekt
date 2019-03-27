@@ -1,12 +1,3 @@
-<%-- 
-    Copyright © 2018 Dennis Schulmeister-Zimolong
-
-    E-Mail: dhbw@windows3.de
-    Webseite: https://www.wpvs.de/
-
-    Dieser Quellcode ist lizenziert unter einer
-    Creative Commons Namensnennung 4.0 International Lizenz.
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@taglib tagdir="/WEB-INF/tags/templates" prefix="template"%>
@@ -40,7 +31,7 @@
             <%-- Feld zum Anlegen einer neuen Kategorie --%>
             <div class="column margin">
                 <label for="j_username">Neue Kategorie:</label>
-                <input type="text" name="name" value="${categories_form.values["name"][0]}">
+                <input type="text" name="name" value="${genres_form.values["name"][0]}">
 
                 <button type="submit" name="action" value="create" class="icon-pencil">
                     Anlegen
@@ -48,9 +39,9 @@
             </div>
 
             <%-- Fehlermeldungen --%>
-            <c:if test="${!empty categories_form.errors}">
+            <c:if test="${!empty genres_form.errors}">
                 <ul class="errors margin">
-                    <c:forEach items="${categories_form.errors}" var="error">
+                    <c:forEach items="${genres_form.errors}" var="error">
                         <li>${error}</li>
                         </c:forEach>
                 </ul>
@@ -58,7 +49,7 @@
 
             <%-- Vorhandene Kategorien --%>
             <c:choose>
-                <c:when test="${empty categories}">
+                <c:when test="${empty genre}">
                     <p>
                         Es sind noch keine Kategorien vorhanden. 🐏
                     </p>
@@ -66,10 +57,10 @@
                 <c:otherwise>
                     <div>
                         <div class="margin">
-                            <c:forEach items="${categories}" var="category">
-                                <input type="checkbox" name="category" id="${'category-'.concat(category.id)}" value="${category.id}" />
-                                <label for="${'category-'.concat(category.id)}">
-                                    <c:out value="${category.name}"/>
+                            <c:forEach items="${genres}" var="genre">
+                                <input type="checkbox" name="genre" id="${'genre-'.concat(genre.id)}" value="${genre.id}" />
+                                <label for="${'genre-'.concat(genre.id)}">
+                                    <c:out value="${genre.name}"/>
                                 </label>
                                 <br />
                             </c:forEach>
