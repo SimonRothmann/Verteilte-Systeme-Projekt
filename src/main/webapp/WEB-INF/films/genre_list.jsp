@@ -51,7 +51,7 @@
             <c:choose>
                 <c:when test="${empty genres}">   <%-- Änderung von genre auf genres --%>
                     <p>
-                        Es wurden noch kein Kategorien erstellt. 🦄
+                        Es wurde noch kein Genre erstellt. 🦄
                     </p>
                 </c:when>
                 <c:otherwise>

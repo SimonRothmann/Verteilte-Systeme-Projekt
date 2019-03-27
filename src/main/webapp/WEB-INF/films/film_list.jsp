@@ -6,7 +6,7 @@
 
 <template:base>
     <jsp:attribute name="title">
-        Liste der Aufgaben
+        Status-Liste
     </jsp:attribute>
 
     <jsp:attribute name="head">
@@ -15,11 +15,11 @@
 
     <jsp:attribute name="menu">
         <div class="menuitem">
-            <a href="<c:url value="/app/dashboard/"/>">Dashboard</a>
+            <a href="<c:url value="/app/dashboard/"/>">Startseite</a>
         </div>
 
         <div class="menuitem">
-            <a href="<c:url value="/app/films/film/new/"/>">Aufgabe anlegen</a>
+            <a href="<c:url value="/app/films/film/new/"/>">Status anlegen</a>
         </div>
 
         <div class="menuitem">
@@ -61,7 +61,7 @@
         <c:choose>
             <c:when test="${empty films}">
                 <p>
-                    Es wurden noch keine Aufgaben erstellt. ❌
+                    Es wurden noch keine Stati erstellt. ❌
                 </p>
             </c:when>
             <c:otherwise>
@@ -72,9 +72,9 @@
                         <tr>
                             <th>Bezeichnung</th>
                             <th>Genre</th>
-                            <th>Eigentümer</th>
+                            <th>Angelegt von</th>
                             <th>Status</th>
-                            <th>Fällig am</th>
+                            <th>Muss gesehen werden bis</th>
                         </tr>
                     </thead>
                     <c:forEach items="${films}" var="film">

@@ -1,12 +1,3 @@
-<%-- 
-    Copyright © 2018 Dennis Schulmeister-Zimolong
-
-    E-Mail: dhbw@windows3.de
-    Webseite: https://www.wpvs.de/
-
-    Dieser Quellcode ist lizenziert unter einer
-    Creative Commons Namensnennung 4.0 International Lizenz.
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@taglib tagdir="/WEB-INF/tags/templates" prefix="template"%>
@@ -15,7 +6,7 @@
 
 <template:base>
     <jsp:attribute name="title">
-        Anmeldung nicht möglich
+        Eine Anmeldung ist leider nicht möglich 😔
     </jsp:attribute>
 
     <jsp:attribute name="head">
@@ -24,13 +15,13 @@
 
     <jsp:attribute name="menu">
         <div class="menuitem">
-            <a href="<c:url value="/logout/"/>">Nochmal versuchen</a>
+            <a href="<c:url value="/logout/"/>">Versuchs nochmal!</a>
         </div>
     </jsp:attribute>
 
     <jsp:attribute name="content">
         <p>
-            Das hat leider nicht geklappt. 🐻
+            Da ist leider etwas schief gelaufen 👩‍🔧👨‍🔧
         </p>
     </jsp:attribute>
 </template:base>

@@ -22,7 +22,7 @@
 
     <jsp:attribute name="menu">
         <div class="menuitem">
-            <a href="<c:url value="/app/dashboard/"/>">Dashboard</a>
+            <a href="<c:url value="/app/dashboard/"/>">Startseite</a>
         </div>
         
         <div class="menuitem">
@@ -37,7 +37,7 @@
                 <input type="hidden" name="csrf_token" value="${csrf_token}">
 
                 <%-- Eingabefelder --%>
-                <label for="film_owner">Eigentümer:</label>
+                <label for="film_owner">Angelegt von:</label>
                 <div class="side-by-side">
                     <input type="text" name="film_owner" value="${film_form.values["film_owner"][0]}" readonly="readonly">
                 </div>
@@ -45,7 +45,7 @@
                 <label for="film_genre">Genre:</label>
                 <div class="side-by-side">
                     <select name="film_genre">
-                        <option value="">Keine Kategorie</option>
+                        <option value="">Kein Genre</option>
 
                         <c:forEach items="${genres}" var="genre">
                             <option value="${genre.id}" ${film_form.values["film_genre"][0] == genre.id.toString() ? 'selected' : ''}>
@@ -56,7 +56,7 @@
                 </div>
 
                 <label for="film_due_date">
-                    Fällig am:
+                    Muss gesehen werden bis:
                     <span class="required">*</span>
                 </label>
                 <div class="side-by-side">
@@ -96,12 +96,12 @@
                 <%-- Button zum Abschicken --%>
                 <div class="side-by-side">
                     <button class="icon-pencil" type="submit" name="action" value="save">
-                        Sichern
+                        Speichern
                     </button>
 
                     <c:if test="${edit}">
                         <button class="icon-trash" type="submit" name="action" value="delete">
-                            Löschen
+                            Entfernen
                         </button>
                     </c:if>
                 </div>

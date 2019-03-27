@@ -1,12 +1,3 @@
-<%-- 
-    Copyright © 2019 Dennis Schulmeister-Zimolong
-
-    E-Mail: dhbw@windows3.de
-    Webseite: https://www.wpvs.de/
-
-    Dieser Quellcode ist lizenziert unter einer
-    Creative Commons Namensnennung 4.0 International Lizenz.
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@taglib tagdir="/WEB-INF/tags/templates" prefix="template"%>
@@ -15,7 +6,7 @@
 
 <template:base>
     <jsp:attribute name="title">
-        Dashboard
+        Startseite
     </jsp:attribute>
 
     <jsp:attribute name="head">
@@ -28,7 +19,7 @@
         </div>
 
         <div class="menuitem">
-            <a href="<c:url value="/app/films/film/new/"/>">Aufgabe anlegen</a>
+            <a href="<c:url value="/app/films/film/new/"/>">Status anlegen</a>
         </div>
 
         <div class="menuitem">
@@ -40,7 +31,7 @@
         <c:choose>
             <c:when test="${empty sections}">
                 <p>
-                    Es wurden keine Dashboard-Kacheln gefunden. 🙈
+                    Die Startseite ist wohl leer 😳
                 </p>
             </c:when>
             <c:otherwise>

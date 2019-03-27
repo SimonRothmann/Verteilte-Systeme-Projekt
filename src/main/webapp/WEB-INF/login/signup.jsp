@@ -1,12 +1,3 @@
-<%-- 
-    Copyright © 2018 Dennis Schulmeister-Zimolong
-
-    E-Mail: dhbw@windows3.de
-    Webseite: https://www.wpvs.de/
-
-    Dieser Quellcode ist lizenziert unter einer
-    Creative Commons Namensnennung 4.0 International Lizenz.
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@taglib tagdir="/WEB-INF/tags/templates" prefix="template"%>
@@ -17,7 +8,7 @@
 
 <template:base>
     <jsp:attribute name="title">
-        Registrierung
+        Registrieren
     </jsp:attribute>
 
     <jsp:attribute name="head">
@@ -55,7 +46,7 @@
                     </div>
                     
                     <label for="signup_username">
-                        Benutzername:
+                        Fantasiename:
                         <span class="required">*</span>
                     </label>
                     <div class="side-by-side">
@@ -71,7 +62,7 @@
                     </div>
 
                     <label for="signup_password2">
-                        Passwort (wdh.):
+                        Passwort (bitte wiederholen):
                         <span class="required">*</span>
                     </label>
                     <div class="side-by-side">
