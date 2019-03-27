@@ -29,7 +29,7 @@ public class Genre implements Serializable {
 
     @Column(length = 30)
     @NotNull(message = "Der Name darf nicht leer sein.")
-    @Size(min = 3, max = 30, message = "Wer zu doof ist, seinen Namen auszuschreiben, sollte es bleiben lassen.")
+    @Size(min = 3, max = 30, message = "Wessen Name kürzer als 3 Zeichen ist, darf sich hier nicht anmelden ;)")
     private String name;
 
     @OneToMany(mappedBy = "genre", fetch = FetchType.LAZY)
