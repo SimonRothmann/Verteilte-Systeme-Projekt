@@ -17,7 +17,7 @@
         <div class="menuitem">
             <a href="<c:url value="/app/dashboard/"/>">Startseite</a>
         </div>
-        
+
         <div class="menuitem">
             <a href="<c:url value="/app/films/list/"/>">Film-Liste</a>
         </div>
@@ -70,11 +70,11 @@
             </c:when>
             <c:otherwise>
                 <jsp:useBean id="utils" class="dhbwka.wwi.vertsys.javaee.filmsortierung.common.web.WebUtils"/>
-                
+
                 <table>
                     <thead>
                         <tr>
-                            <th>Bezeichnung</th>
+                            <th>Film-Titel</th>
                             <th>Genre</th>
                             <th>Angelegt von</th>
                             <th>Status</th>

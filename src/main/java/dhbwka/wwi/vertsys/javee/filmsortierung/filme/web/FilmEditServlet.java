@@ -1,11 +1,11 @@
 package dhbwka.wwi.vertsys.javee.filmsortierung.filme.web;
 
-import dhbwka.wwi.vertsys.javaee.filmsortierung.common.web.WebUtils;
-import dhbwka.wwi.vertsys.javaee.filmsortierung.common.web.FormValues;
 import dhbwka.wwi.vertsys.javaee.filmsortierung.common.ejb.UserBean;
 import dhbwka.wwi.vertsys.javaee.filmsortierung.common.ejb.ValidationBean;
-import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.GenreBean;
+import dhbwka.wwi.vertsys.javaee.filmsortierung.common.web.FormValues;
+import dhbwka.wwi.vertsys.javaee.filmsortierung.common.web.WebUtils;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.FilmBean;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.GenreBean;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Film;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.FilmStatus;
 import java.io.IOException;
@@ -54,7 +54,7 @@ public class FilmEditServlet extends HttpServlet {
 
         Film film = this.getRequestedFilm(request);
         request.setAttribute("edit", film.getId() != 0);
-                                
+
         if (session.getAttribute("film_form") == null) {
             // Keine Formulardaten mit fehlerhaften Daten in der Session,
             // daher Formulardaten aus dem Datenbankobjekt übernehmen
@@ -63,7 +63,7 @@ public class FilmEditServlet extends HttpServlet {
 
         // Anfrage an die JSP weiterleiten
         request.getRequestDispatcher("/WEB-INF/films/film_edit.jsp").forward(request, response);
-        
+
         session.removeAttribute("film_form");
     }
 
@@ -125,13 +125,13 @@ public class FilmEditServlet extends HttpServlet {
         if (dueDate != null) {
             film.setDueDate(dueDate);
         } else {
-            errors.add("Das Datum muss dem Format dd.mm.yyyy entsprechen.");
+            errors.add("Du musst ein Datum eintragen, dass dem Format dd.mm.yyyy entspricht.");
         }
 
         if (dueTime != null) {
             film.setDueTime(dueTime);
         } else {
-            errors.add("Die Uhrzeit muss dem Format hh:mm:ss entsprechen.");
+            errors.add("Die Uhrzeit muss das Format hh:mm:ss haben.");
         }
 
         try {

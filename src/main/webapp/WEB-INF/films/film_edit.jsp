@@ -24,7 +24,7 @@
         <div class="menuitem">
             <a href="<c:url value="/app/dashboard/"/>">Startseite</a>
         </div>
-        
+
         <div class="menuitem">
             <a href="<c:url value="/app/films/list/"/>">Film-Liste</a>
         </div>
@@ -87,7 +87,7 @@
                 </div>
 
                 <label for="film_short_text">
-                    Bezeichnung:
+                    Film-Titel:
                     <span class="required">*</span>
                 </label>
                 <div class="side-by-side">
@@ -120,7 +120,7 @@
                 <ul class="errors">
                     <c:forEach items="${film_form.errors}" var="error">
                         <li>${error}</li>
-                    </c:forEach>
+                        </c:forEach>
                 </ul>
             </c:if>
         </form>

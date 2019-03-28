@@ -31,15 +31,15 @@ public class Film implements Serializable {
     private long id;
 
     @ManyToOne
-    @NotNull(message = "Die Aufgabe muss einem Benutzer geordnet werden.")
+    @NotNull(message = "Der Film sollte einem Benutzer zugeordnet werden.")
     private User owner;
 
     @ManyToOne
     private Genre genre;
 
     @Column(length = 50)
-    @NotNull(message = "Die Bezeichnung darf nicht leer sein.")
-    @Size(min = 1, max = 50, message = "Die Bezeichnung muss zwischen ein und 50 Zeichen lang sein.")
+    @NotNull(message = "Der Film-Titel darf nicht leer sein. Sonst weißt du ja nicht was du anschauen willst!")
+    @Size(min = 1, max = 50, message = "Der Film-Titel muss ausgefüllt werden (1-50 Zeichen), sonst weißt du ja nicht was du schauen möchtest.")
     private String shortText;
 
     @Lob
