@@ -36,6 +36,9 @@
         <div class="menuitem">
             <a href="<c:url value="/app/films/genre/"/>">Genres bearbeiten</a>
         </div>
+        <div class="menuitem">
+            <a href="<c:url value="/app/changeData/"/>">Benutzerverwaltung</a>
+        </div>
     </jsp:attribute>
 
     <jsp:attribute name="content">
