@@ -108,6 +108,7 @@ public class FilmEditServlet extends HttpServlet {
         String filmStatus = request.getParameter("film_status");
         String filmShortText = request.getParameter("film_short_text");
         String filmLongText = request.getParameter("film_long_text");
+        String filmRunTime = request.getParameter("film_run_time");
 
         Film film = this.getRequestedFilm(request);
 
@@ -121,6 +122,7 @@ public class FilmEditServlet extends HttpServlet {
 
         Date dueDate = WebUtils.parseDate(filmDueDate);
         Time dueTime = WebUtils.parseTime(filmDueTime);
+        float runTime = Float.parseFloat(filmRunTime);
 
         if (dueDate != null) {
             film.setDueDate(dueDate);
@@ -140,6 +142,7 @@ public class FilmEditServlet extends HttpServlet {
             errors.add("Der ausgewählte Status ist nicht vorhanden.");
         }
 
+        film.setRunTime(runTime);
         film.setShortText(filmShortText);
         film.setLongText(filmLongText);
 
@@ -261,6 +264,10 @@ public class FilmEditServlet extends HttpServlet {
 
         values.put("film_short_text", new String[]{
             film.getShortText()
+        });
+
+        values.put("film_run_time", new String[]{
+            String.valueOf(film.getRunTime())
         });
 
         values.put("film_long_text", new String[]{

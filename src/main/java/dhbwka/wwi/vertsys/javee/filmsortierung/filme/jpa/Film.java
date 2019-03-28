@@ -56,17 +56,21 @@ public class Film implements Serializable {
     @NotNull
     private FilmStatus status = FilmStatus.OPEN;
 
+    @NotNull(message = "Der Film hat eine gewisse Spieldauer!")
+    private float runTime;
+
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
     public Film() {
     }
 
-    public Film(User owner, Genre genre, String shortText, String longText, Date dueDate, Time dueTime) {
+    public Film(User owner, Genre genre, String shortText, String longText, Date dueDate, Time dueTime, float runTime) {
         this.owner = owner;
         this.genre = genre;
         this.shortText = shortText;
         this.longText = longText;
         this.dueDate = dueDate;
         this.dueTime = dueTime;
+        this.runTime = runTime;
     }
     //</editor-fold>
 
@@ -133,6 +137,14 @@ public class Film implements Serializable {
 
     public void setStatus(FilmStatus status) {
         this.status = status;
+    }
+
+    public float getRunTime() {
+        return runTime;
+    }
+
+    public void setRunTime(float runTime) {
+        this.runTime = runTime;
     }
     //</editor-fold>
 

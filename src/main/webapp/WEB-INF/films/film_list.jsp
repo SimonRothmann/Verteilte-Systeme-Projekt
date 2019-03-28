@@ -79,6 +79,7 @@
                         <tr>
                             <th>Film-Titel</th>
                             <th>Genre</th>
+                            <th>Spieldauer</th>
                             <th>Angelegt von</th>
                             <th>Status</th>
                             <th>Muss gesehen werden bis</th>
@@ -93,6 +94,9 @@
                             </td>
                             <td>
                                 <c:out value="${film.genre.name}"/>
+                            </td>
+                            <td>
+                                <c:out value="${film.runTime}"/>
                             </td>
                             <td>
                                 <c:out value="${film.owner.username}"/>

@@ -96,6 +96,13 @@
                 <div class="side-by-side">
                     <input type="text" name="film_short_text" value="${film_form.values["film_short_text"][0]}">
                 </div>
+                <label for="film_run_time">
+                    Spieldauer:
+                    <span class="required">*</span>
+                </label>
+                <div class="side-by-side">
+                    <input type="text" name="film_run_time" value="${film_form.values["film_run_time"][0]}">
+                </div>
 
                 <label for="film_long_text">
                     Beschreibung:
