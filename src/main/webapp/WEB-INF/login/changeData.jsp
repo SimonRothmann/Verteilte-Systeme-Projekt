@@ -52,14 +52,14 @@
                         Vorname:
                     </label>
                     <div class="side-by-side">
-                        <input type="text" name="change_vorname" placeholder="${current_user.vorname}">
+                        <input type="text" name="change_vorname" placeholder="${current_user.forename}">
                     </div>
 
                     <label for="change_nachname">
                         Nachname:
                     </label>
                     <div class="side-by-side">
-                        <input type="text" name="change_nachname" placeholder="${current_user.nachname}">
+                        <input type="text" name="change_nachname" placeholder="${current_user.surname}">
                     </div>
 
                     <label for="change_old_password">
