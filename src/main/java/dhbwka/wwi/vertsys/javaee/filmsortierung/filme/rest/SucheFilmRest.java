@@ -47,9 +47,6 @@ public class SucheFilmRest {
             // credentials = username:password
             final String[] values = credentials.split(":", 2);
 
-            System.out.println("");
-            System.out.println(values[0] + " bla " + values[1]);
-
             // Error: 0 = kein User; 2 = falsches Passwort
             List<User> user = userBean.findUser(values[0]);
             if (user.size() < 1) {
