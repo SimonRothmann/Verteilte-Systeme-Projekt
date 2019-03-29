@@ -43,16 +43,16 @@
 						var count = 1;
 
 							$.each(temp, function(key, val) {
-								items.push("<h3>" + count + ". Film</h3>");
+								items.push("<h3>" + count + ". Genre</h3>");
 								console.log(val.id);
-								items.push("<li>FilmId: " + val.id + "</li>");
-								items.push("<li>Filmname: " + val.name + "</li>");
+								items.push("<li>GenreId: " + val.id + "</li>");
+								items.push("<li>Genren: " + val.name + "</li>");
 
 								count = count + 1;
 							});
 
 							if(items.length < 1){
-								items.push("<h3>Keine Filme gefunden!</h3>");
+								items.push("<h3>Keine Genre gefunden!</h3>");
 							}
 
 							printHTML();
@@ -87,7 +87,7 @@
 	<br />
 
 	<div>
-		<button id="btnSuchen">Lade Filme</button>
+		<button id="btnSuchen">Lade Genre</button>
 	</div>
 	<br />
 	<div id="platzhalter">
