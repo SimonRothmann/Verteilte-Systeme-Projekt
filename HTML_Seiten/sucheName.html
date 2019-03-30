@@ -100,13 +100,15 @@
 								console.log(val.id);
 								items.push("<li>FilmId: " + val.id + "</li>");
 								items.push("<li>Film: " + val.name + "</li>");
-                                items.push("<li>Spieldauer: " + val.runTime + "</li>");
+                                items.push("<li>Spieldauer: " + val.runTime + "</li>");                                   
+                                items.push("<li>Genre: " + val.genre.name + "</li>");                             
+                                items.push("<li>Status: " + val.status + "</li>");
 
 								count = count + 1;
 							});
 
 							if(items.length < 1){
-								items.push("<h3>Keine Genre gefunden!</h3>");
+								items.push("<h3>Keine Filme gefunden!</h3>");
 							}
 
 							printHTML();
