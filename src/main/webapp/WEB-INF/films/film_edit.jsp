@@ -89,12 +89,12 @@
                     </select>
                 </div>
 
-                <label for="film_short_text">
+                <label for="film_name">
                     Film-Titel:
                     <span class="required">*</span>
                 </label>
                 <div class="side-by-side">
-                    <input type="text" name="film_short_text" value="${film_form.values["film_short_text"][0]}">
+                    <input type="text" name="film_name" value="${film_form.values["film_name"][0]}">
                 </div>
                 <label for="film_run_time">
                     Spieldauer:

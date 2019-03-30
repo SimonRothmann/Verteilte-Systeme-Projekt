@@ -40,7 +40,7 @@ public class Film implements Serializable {
     @Column(length = 50)
     @NotNull(message = "Der Film-Titel darf nicht leer sein. Sonst weißt du ja nicht was du anschauen willst!")
     @Size(min = 1, max = 50, message = "Der Film-Titel muss ausgefüllt werden (1-50 Zeichen), sonst weißt du ja nicht was du schauen möchtest.")
-    private String shortText;
+    private String name;
 
     @Lob
     @NotNull
@@ -63,10 +63,10 @@ public class Film implements Serializable {
     public Film() {
     }
 
-    public Film(User owner, Genre genre, String shortText, String longText, Date dueDate, Time dueTime, float runTime) {
+    public Film(User owner, Genre genre, String name, String longText, Date dueDate, Time dueTime, float runTime) {
         this.owner = owner;
         this.genre = genre;
-        this.shortText = shortText;
+        this.name = name;
         this.longText = longText;
         this.dueDate = dueDate;
         this.dueTime = dueTime;
@@ -99,12 +99,12 @@ public class Film implements Serializable {
         this.genre = genre;
     }
 
-    public String getShortText() {
-        return shortText;
+    public String getName() {
+        return name;
     }
 
-    public void setShortText(String shortText) {
-        this.shortText = shortText;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLongText() {

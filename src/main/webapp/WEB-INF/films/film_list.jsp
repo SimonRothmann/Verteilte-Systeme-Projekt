@@ -89,7 +89,7 @@
                         <tr>
                             <td>
                                 <a href="<c:url value="/app/films/film/${film.id}/"/>">
-                                    <c:out value="${film.shortText}"/>
+                                    <c:out value="${film.name}"/>
                                 </a>
                             </td>
                             <td>

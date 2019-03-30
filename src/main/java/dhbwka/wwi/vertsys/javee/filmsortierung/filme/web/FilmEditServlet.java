@@ -106,7 +106,7 @@ public class FilmEditServlet extends HttpServlet {
         String filmDueDate = request.getParameter("film_due_date");
         String filmDueTime = request.getParameter("film_due_time");
         String filmStatus = request.getParameter("film_status");
-        String filmShortText = request.getParameter("film_short_text");
+        String filmName = request.getParameter("film_name");
         String filmLongText = request.getParameter("film_long_text");
         String filmRunTime = request.getParameter("film_run_time");
 
@@ -143,7 +143,7 @@ public class FilmEditServlet extends HttpServlet {
         }
 
         film.setRunTime(runTime);
-        film.setShortText(filmShortText);
+        film.setName(filmName);
         film.setLongText(filmLongText);
 
         this.validationBean.validate(film, errors);
@@ -262,8 +262,8 @@ public class FilmEditServlet extends HttpServlet {
             film.getStatus().toString()
         });
 
-        values.put("film_short_text", new String[]{
-            film.getShortText()
+        values.put("film_name", new String[]{
+            film.getName()
         });
 
         values.put("film_run_time", new String[]{
