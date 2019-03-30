@@ -27,6 +27,7 @@ public class ApplicationConfig extends Application {
 
         resources.add(dhbwka.wwi.vertsys.javaee.filmsortierung.filme.rest.SucheFilmRest.class);
         resources.add(dhbwka.wwi.vertsys.javaee.filmsortierung.filme.rest.SucheGenreRest.class);
+        resources.add(dhbwka.wwi.vertsys.javaee.filmsortierung.filme.rest.SucheNameRest.class);
 
         return resources;
     }

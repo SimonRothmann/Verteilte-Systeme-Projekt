@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		let url = "http://localhost:8080/Filmsortierung/RestAPI/";
+		let urlAlle = "sucheName/";
+		let items = [];
+		let urlParameter = "";
+
+		//ListRest
+		$(document).ready(function() {
+			$("#btnSucheGenre").click(function() {
+				var username = $('#username').val();
+				var password = $('#passwort').val();
+
+				//Falls leer
+				if(!username || !password){
+					items.push("<h3>Bitte loggen Sie sich ein!</h3>");	
+					printHTML();
+					return;
+				}
+
+                let parameter = "genre:" + $('#name').val();
+				//Service Link
+					urlParameter = url + urlAlle + parameter;
+
+			let response = fetch(urlParameter, {
+					method: "GET",
+					headers: {
+						"accept": "application/json",
+						"content-type": "application/json",
+						"authorization": "Basic " + btoa(username + ":" + password)
+					},
+				});
+
+				response.then(function(value){
+					var data = value.json();
+
+					data.then(function(temp){
+
+						var count = 1;
+
+							$.each(temp, function(key, val) {
+								items.push("<h3>" + count + ". Genre</h3>");
+								console.log(val.id);
+								items.push("<li>GenreId: " + val.id + "</li>");
+								items.push("<li>Genre: " + val.name + "</li>");
+
+								count = count + 1;
+							});
+
+							if(items.length < 1){
+								items.push("<h3>Keine Genre gefunden!</h3>");
+							}
+
+							printHTML();
+					});
+				});
+
+
+
+			});
+
+            
+			$("#btnSucheFilm").click(function() {
+				var username = $('#username').val();
+				var password = $('#passwort').val();
+
+				//Falls leer
+				if(!username || !password){
+					items.push("<h3>Bitte loggen Sie sich ein!</h3>");	
+					printHTML();
+					return;
+				}
+
+                let parameter = "film:" + $('#name').val();
+				//Service Link
+					urlParameter = url + urlAlle + parameter;
+
+			let response = fetch(urlParameter, {
+					method: "GET",
+					headers: {
+						"accept": "application/json",
+						"content-type": "application/json",
+						"authorization": "Basic " + btoa(username + ":" + password)
+					},
+				});
+
+				response.then(function(value){
+					var data = value.json();
+
+					data.then(function(temp){
+
+						var count = 1;
+
+							$.each(temp, function(key, val) {
+								items.push("<h3>" + count + ". Genre</h3>");
+								console.log(val.id);
+								items.push("<li>FilmId: " + val.id + "</li>");
+								items.push("<li>Film: " + val.name + "</li>");
+                                items.push("<li>Spieldauer: " + val.runTime + "</li>");
+
+								count = count + 1;
+							});
+
+							if(items.length < 1){
+								items.push("<h3>Keine Genre gefunden!</h3>");
+							}
+
+							printHTML();
+					});
+				});
+
+
+
+			});
+		});
+
+
+		function printHTML(){
+			$("#platzhalter").empty();
+
+			$("<ul/>", {
+				"class": "my-new-list",
+				html: items.join("")
+			}).appendTo("#platzhalter");
+
+			items = [];
+		}
+	</script>
+</head>
+
+<body>
+	<div>
+		<input id="username" type="text" placeholder="Username" />
+		<input id="passwort" type="password" placeholder="Passwort" />
+	</div>
+
+	<br />
+
+	<div>
+        <input id="name" type="text" placeholder="Suchbegriff"/>
+
+        <button id="btnSucheGenre">Suche nach Genre</button>
+        <button id="btnSucheFilm">Suche nach Filmtitel</button>
+	</div>
+	<br />
+	<div id="platzhalter">
+
+	</div>
+</body>
