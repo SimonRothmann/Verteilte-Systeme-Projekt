@@ -1,11 +1,11 @@
 package dhbwka.wwi.vertsys.javee.filmsortierung.filme.web;
 
-import dhbwka.wwi.vertsys.javaee.filmsortierung.common.web.FormValues;
 import dhbwka.wwi.vertsys.javaee.filmsortierung.common.ejb.ValidationBean;
-import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.GenreBean;
+import dhbwka.wwi.vertsys.javaee.filmsortierung.common.web.FormValues;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.FilmBean;
-import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Genre;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.GenreBean;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Film;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Genre;
 import java.io.IOException;
 import java.util.List;
 import javax.ejb.EJB;
@@ -18,9 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Seite zum Anzeigen und Bearbeiten der Kategorien. Die Seite besitzt ein
- * Formular, mit dem ein neue Kategorie angelegt werden kann, sowie eine Liste,
- * die zum Löschen der Kategorien verwendet werden kann.
+ * Seite zum Anzeigen und Bearbeiten der Genre. Die Seite besitzt ein Formular,
+ * mit dem ein neues Genre angelegt werden kann, sowie eine Liste, die zum
+ * Löschen der Genre verwendet werden kann.
  */
 @WebServlet(urlPatterns = {"/app/films/genre/"})
 public class GenreListServlet extends HttpServlet {
@@ -38,7 +38,7 @@ public class GenreListServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Alle vorhandenen Kategorien ermitteln
+        // Alle vorhandenen Genre ermitteln
         request.setAttribute("genres", this.genreBean.findAllSorted());
 
         // Anfrage an dazugerhörige JSP weiterleiten
@@ -54,7 +54,7 @@ public class GenreListServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Angeforderte Aktion ausführen        
+        // Angeforderte Aktion ausführen
         String action = request.getParameter("action");
 
         if (action == null) {
@@ -72,7 +72,7 @@ public class GenreListServlet extends HttpServlet {
     }
 
     /**
-     * Aufgerufen in doPost(): Neue Kategorie anlegen
+     * Aufgerufen in doPost(): Neues Genre anlegen
      *
      * @param request
      * @param response
@@ -88,7 +88,7 @@ public class GenreListServlet extends HttpServlet {
         Genre genre = new Genre(name);
         List<String> errors = this.validationBean.validate(genre);
 
-        // Neue Kategorie anlegen
+        // Neues Genre anlegen
         if (errors.isEmpty()) {
             this.genreBean.saveNew(genre);
         }
@@ -107,7 +107,7 @@ public class GenreListServlet extends HttpServlet {
     }
 
     /**
-     * Aufgerufen in doPost(): Markierte Kategorien löschen
+     * Aufgerufen in doPost(): Markierte Genre löschen
      *
      * @param request
      * @param response
@@ -117,16 +117,16 @@ public class GenreListServlet extends HttpServlet {
     private void deleteGenres(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Markierte Kategorie IDs auslesen
+        // Markierte Genre IDs auslesen
         String[] genreIds = request.getParameterValues("genre");
 
         if (genreIds == null) {
             genreIds = new String[0];
         }
 
-        // Kategorien löschen
+        // Genre löschen
         for (String genreId : genreIds) {
-            // Zu löschende Kategorie ermitteln
+            // Zu löschende Genre ermitteln
             Genre genre;
 
             try {
@@ -139,7 +139,7 @@ public class GenreListServlet extends HttpServlet {
                 continue;
             }
 
-            // Bei allen betroffenen Aufgaben, den Bezug zur Kategorie aufheben
+            // Bei allen betroffenen Filmen, den Bezug zum Genre aufheben
             List<Film> films = genre.getFilms();
 
             if (films != null) {

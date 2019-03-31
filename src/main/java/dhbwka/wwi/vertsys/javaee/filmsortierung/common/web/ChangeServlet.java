@@ -94,7 +94,6 @@ public class ChangeServlet extends HttpServlet {
 
         User user = userBean.getCurrentUser();
 
-        // Verfügbare Spezies und Stati für die Suchfelder ermitteln
         request.setAttribute("current_user", user);
 
         // Anzuzeigende Aufgaben suchen

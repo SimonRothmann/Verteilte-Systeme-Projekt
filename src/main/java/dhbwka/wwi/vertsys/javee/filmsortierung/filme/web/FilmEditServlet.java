@@ -45,11 +45,11 @@ public class FilmEditServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Verfügbare Kategorien und Stati für die Suchfelder ermitteln
+        // Verfügbare Kategorien und Status für die Suchfelder ermitteln
         request.setAttribute("genres", this.genreBean.findAllSorted());
         request.setAttribute("statuses", FilmStatus.values());
 
-        // Zu bearbeitende Aufgabe einlesen
+        // Zu bearbeitenden Film einlesen
         HttpSession session = request.getSession();
 
         Film film = this.getRequestedFilm(request);

@@ -68,7 +68,7 @@
         <c:choose>
             <c:when test="${empty films}">
                 <p>
-                    Es wurden noch keine Stati erstellt. ❌
+                    Es wurden noch keine Status erstellt. ❌
                 </p>
             </c:when>
             <c:otherwise>

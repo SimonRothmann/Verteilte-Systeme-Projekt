@@ -8,10 +8,10 @@
     <jsp:attribute name="title">
         <c:choose>
             <c:when test="${edit}">
-                Aufgabe bearbeiten
+                Film bearbeiten
             </c:when>
             <c:otherwise>
-                Aufgabe anlegen
+                Film anlegen
             </c:otherwise>
         </c:choose>
     </jsp:attribute>

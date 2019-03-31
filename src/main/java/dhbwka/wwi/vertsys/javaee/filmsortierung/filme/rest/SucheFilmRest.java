@@ -47,10 +47,10 @@ public class SucheFilmRest {
             // credentials = username:password
             final String[] values = credentials.split(":", 2);
 
-            // Error: 0 = kein User; 2 = falsches Passwort
+            // Error: 3 = kein User; 2 = falsches Passwort
             List<User> user = userBean.findUser(values[0]);
             if (user.size() < 1) {
-                return "0";
+                return "3";
             }
 
             if (user.get(0).checkPassword(values[1])) {

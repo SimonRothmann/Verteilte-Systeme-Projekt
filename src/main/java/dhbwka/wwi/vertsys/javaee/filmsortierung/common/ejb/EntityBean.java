@@ -68,7 +68,11 @@ public abstract class EntityBean<Entity, EntityId> {
         String select = "SELECT e FROM $E e WHERE e.username = :username".replace("$E", this.entityClass.getName());
         return em.createQuery(select).setParameter("username", username).getResultList();
     }
-
+    /**
+     * Auslesen aller Datensätze nach Name(Reihenfolge undefiniert)
+     *
+     * @return Liste mit allen Datensätzen
+     */
     public List<Entity> findAllByName(String name) {
         String select = "SELECT e FROM $E e WHERE e.name = :name".replace("$E", this.entityClass.getName());
         return em.createQuery(select).setParameter("name", name).getResultList();

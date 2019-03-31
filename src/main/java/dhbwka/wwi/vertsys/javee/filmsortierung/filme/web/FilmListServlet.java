@@ -4,11 +4,11 @@ package dhbwka.wwi.vertsys.javee.filmsortierung.filme.web;
  *
  * @author simon
  */
-import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.GenreBean;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.FilmBean;
-import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Genre;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.ejb.GenreBean;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Film;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.FilmStatus;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Genre;
 import java.io.IOException;
 import java.util.List;
 import javax.ejb.EJB;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet für die tabellarische Auflisten der Aufgaben.
+ * Servlet für die tabellarische Auflisten der Filme.
  */
 @WebServlet(urlPatterns = {"/app/films/list/"})
 public class FilmListServlet extends HttpServlet {
@@ -43,7 +43,7 @@ public class FilmListServlet extends HttpServlet {
         String searchGenre = request.getParameter("search_genre");
         String searchStatus = request.getParameter("search_status");
 
-        // Anzuzeigende Aufgaben suchen
+        // Anzuzeigende Filme suchen
         Genre genre = null;
         FilmStatus status = null;
 

@@ -41,7 +41,17 @@
 					data.then(function(temp){
 
 						var count = 1;
+						if(temp == 3){
+							items.push("<h3>Kein User gefunden!</h3>");
+							printHTML();
+							return;
+						}
 
+						if(temp == 2){
+							items.push("<h3>Passwort ist falsch!</h3>");
+							printHTML();
+							return;
+						}
 							$.each(temp, function(key, val) {
 								items.push("<h3>" + count + ". Genre</h3>");
 								console.log(val.id);
