@@ -7,7 +7,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 
 /**
- * Einfache EJB mit den üblichen CRUD-Methoden für Kategorien.
+ * Einfache EJB mit den üblichen CRUD-Methoden für Genre.
  */
 @Stateless
 @RolesAllowed("app-user")
@@ -18,9 +18,9 @@ public class GenreBean extends EntityBean<Genre, Long> {
     }
 
     /**
-     * Auslesen aller Kategorien, alphabetisch sortiert.
+     * Auslesen aller Genre, alphabetisch sortiert.
      *
-     * @return Liste mit allen Kategorien
+     * @return Liste mit allen Genre
      */
     public List<Genre> findAllSorted() {
         return this.em.createQuery("SELECT c FROM Genre c ORDER BY c.name").getResultList();

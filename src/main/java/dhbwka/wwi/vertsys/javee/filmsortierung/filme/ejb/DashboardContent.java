@@ -4,15 +4,15 @@ import dhbwka.wwi.vertsys.javaee.filmsortierung.common.web.WebUtils;
 import dhbwka.wwi.vertsys.javaee.filmsortierung.dashboard.ejb.DashboardContentProvider;
 import dhbwka.wwi.vertsys.javaee.filmsortierung.dashboard.ejb.DashboardSection;
 import dhbwka.wwi.vertsys.javaee.filmsortierung.dashboard.ejb.DashboardTile;
-import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Genre;
 import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.FilmStatus;
 import static dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.FilmStatus.*;
+import dhbwka.wwi.vertsys.javee.filmsortierung.filme.jpa.Genre;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
- * EJB zur Definition der Dashboard-Kacheln für Aufgaben.
+ * EJB zur Definition der Dashboard-Kacheln für Filme.
  */
 @Stateless(name = "films")
 public class DashboardContent implements DashboardContentProvider {
@@ -32,12 +32,12 @@ public class DashboardContent implements DashboardContentProvider {
      */
     @Override
     public void createDashboardContent(List<DashboardSection> sections) {
-        // Zunächst einen Abschnitt mit einer Gesamtübersicht aller Aufgaben
-        // in allen Kategorien erzeugen
+        // Zunächst einen Abschnitt mit einer Gesamtübersicht aller Filme
+        // in allen Genre erzeugen
         DashboardSection section = this.createSection(null);
         sections.add(section);
 
-        // Anschließend je Kategorie einen weiteren Abschnitt erzeugen
+        // Anschließend je Genre einen weiteren Abschnitt erzeugen
         List<Genre> genres = this.genreBean.findAllSorted();
 
         for (Genre genre : genres) {
@@ -47,15 +47,14 @@ public class DashboardContent implements DashboardContentProvider {
     }
 
     /**
-     * Hilfsmethode, die für die übergebene Aufgaben-Kategorie eine neue Rubrik
-     * mit Kacheln im Dashboard erzeugt. Je Aufgabenstatus wird eine Kachel
-     * erzeugt. Zusätzlich eine Kachel für alle Aufgaben innerhalb der
-     * jeweiligen Kategorie.
+     * Hilfsmethode, die für die übergebene Genre eine neue Rubrik mit Kacheln
+     * im Dashboard erzeugt. Je Filmstatus wird eine Kachel erzeugt. Zusätzlich
+     * eine Kachel für alle Filme innerhalb des jeweiligen Genre.
      *
-     * Ist die Kategorie null, bedeutet dass, dass eine Rubrik für alle Aufgaben
-     * aus allen Kategorien erzeugt werden soll.
+     * Ist das Genre null, bedeutet dass, dass eine Rubrik für alle Filme aus
+     * allen Genre erzeugt werden soll.
      *
-     * @param genre Aufgaben-Kategorie, für die Kacheln erzeugt werden sollen
+     * @param genre Film-Genre, für die Kacheln erzeugt werden sollen
      * @return Neue Dashboard-Rubrik mit den Kacheln
      */
     private DashboardSection createSection(Genre genre) {
@@ -70,11 +69,11 @@ public class DashboardContent implements DashboardContentProvider {
             cssClass = "overview";
         }
 
-        // Eine Kachel für alle Aufgaben in dieser Rubrik erzeugen
+        // Eine Kachel für alle Filme in dieser Rubrik erzeugen
         DashboardTile tile = this.createTile(genre, null, "Alle", cssClass + " status-all", "calendar");
         section.getTiles().add(tile);
 
-        // Ja Aufgabenstatus eine weitere Kachel erzeugen
+        // Ja Filmstatus eine weitere Kachel erzeugen
         for (FilmStatus status : FilmStatus.values()) {
             String cssClass1 = cssClass + " status-" + status.toString().toLowerCase();
             String icon = "";

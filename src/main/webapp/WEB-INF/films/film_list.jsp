@@ -6,7 +6,7 @@
 
 <template:base>
     <jsp:attribute name="title">
-        Status-Liste
+        Film-Liste
     </jsp:attribute>
 
     <jsp:attribute name="head">
@@ -79,7 +79,7 @@
                         <tr>
                             <th>Film-Titel</th>
                             <th>Genre</th>
-                            <th>Spieldauer</th>
+                            <th>Spieldauer in Minuten</th>
                             <th>Angelegt von</th>
                             <th>Status</th>
                             <th>Muss gesehen werden bis</th>

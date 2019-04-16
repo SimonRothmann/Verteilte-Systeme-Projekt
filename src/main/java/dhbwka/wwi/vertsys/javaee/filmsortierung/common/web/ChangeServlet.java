@@ -96,7 +96,6 @@ public class ChangeServlet extends HttpServlet {
 
         request.setAttribute("current_user", user);
 
-        // Anzuzeigende Aufgaben suchen
         request.setAttribute("change_vorname", user.getForename());
         request.setAttribute("change_nachname", user.getSurname());
 

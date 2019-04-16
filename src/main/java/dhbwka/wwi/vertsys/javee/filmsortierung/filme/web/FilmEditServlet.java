@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Seite zum Anlegen oder Bearbeiten einer Aufgabe.
+ * Seite zum Anlegen oder Bearbeiten eines Films.
  */
 @WebServlet(urlPatterns = "/app/films/film/*")
 public class FilmEditServlet extends HttpServlet {
@@ -45,7 +45,7 @@ public class FilmEditServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Verfügbare Kategorien und Status für die Suchfelder ermitteln
+        // Verfügbare Genre und Status für die Suchfelder ermitteln
         request.setAttribute("genres", this.genreBean.findAllSorted());
         request.setAttribute("statuses", FilmStatus.values());
 
@@ -89,7 +89,7 @@ public class FilmEditServlet extends HttpServlet {
     }
 
     /**
-     * Aufgerufen in doPost(): Neue oder vorhandene Aufgabe speichern
+     * Aufgerufen in doPost(): Neuen oder vorhandenen Film speichern
      *
      * @param request
      * @param response
@@ -122,7 +122,6 @@ public class FilmEditServlet extends HttpServlet {
 
         Date dueDate = WebUtils.parseDate(filmDueDate);
         Time dueTime = WebUtils.parseTime(filmDueTime);
-        float runTime = Float.parseFloat(filmRunTime);
 
         if (dueDate != null) {
             film.setDueDate(dueDate);
@@ -136,13 +135,20 @@ public class FilmEditServlet extends HttpServlet {
             errors.add("Die Uhrzeit muss das Format hh:mm:ss haben.");
         }
 
+        String regex = "^[1-9][\\.\\d]*(,\\d+)?$";
+        if (filmRunTime.matches(regex)) {
+            float runTime = Float.parseFloat(filmRunTime);
+            film.setRunTime(runTime);
+        } else {
+            errors.add("Die Spieldauer muss eine Zahl sein und darf nicht mit einer 0 beginnen.");
+        }
+
         try {
             film.setStatus(FilmStatus.valueOf(filmStatus));
         } catch (IllegalArgumentException ex) {
             errors.add("Der ausgewählte Status ist nicht vorhanden.");
         }
 
-        film.setRunTime(runTime);
         film.setName(filmName);
         film.setLongText(filmLongText);
 
@@ -171,7 +177,7 @@ public class FilmEditServlet extends HttpServlet {
     }
 
     /**
-     * Aufgerufen in doPost: Vorhandene Aufgabe löschen
+     * Aufgerufen in doPost: Vorhandenen Film löschen
      *
      * @param request
      * @param response
@@ -190,12 +196,12 @@ public class FilmEditServlet extends HttpServlet {
     }
 
     /**
-     * Zu bearbeitende Aufgabe aus der URL ermitteln und zurückgeben. Gibt
+     * Zu bearbeitenden Film aus der URL ermitteln und zurückgeben. Gibt
      * entweder einen vorhandenen Datensatz oder ein neues, leeres Objekt
      * zurück.
      *
      * @param request HTTP-Anfrage
-     * @return Zu bearbeitende Aufgabe
+     * @return Zu bearbeitender Film
      */
     private Film getRequestedFilm(HttpServletRequest request) {
         // Zunächst davon ausgehen, dass ein neuer Satz angelegt werden soll
@@ -234,7 +240,7 @@ public class FilmEditServlet extends HttpServlet {
      * Formular aus der Entity oder aus einer vorherigen Formulareingabe
      * stammen.
      *
-     * @param film Die zu bearbeitende Aufgabe
+     * @param film Die zu bearbeitender Film
      * @return Neues, gefülltes FormValues-Objekt
      */
     private FormValues createFilmForm(Film film) {

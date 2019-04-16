@@ -97,7 +97,7 @@
                     <input type="text" name="film_name" value="${film_form.values["film_name"][0]}">
                 </div>
                 <label for="film_run_time">
-                    Spieldauer:
+                    Spieldauer in Minuten:
                     <span class="required">*</span>
                 </label>
                 <div class="side-by-side">

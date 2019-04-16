@@ -13,7 +13,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 /**
- * Einfache EJB mit den üblichen CRUD-Methoden für Aufgaben
+ * Einfache EJB mit den üblichen CRUD-Methoden für Filme
  */
 @Stateless
 @RolesAllowed("app-user")
@@ -24,10 +24,10 @@ public class FilmBean extends EntityBean<Film, Long> {
     }
 
     /**
-     * Alle Aufgaben eines Benutzers, nach Fälligkeit sortiert zurückliefern.
+     * Alle Filme eines Benutzers, nach "zu schauen bis" sortiert.
      *
      * @param username Benutzername
-     * @return Alle Aufgaben des Benutzers
+     * @return Alle Filme des Benutzers
      */
     public List<Film> findByUsername(String username) {
         return em.createQuery("SELECT t FROM Film t WHERE t.owner.username = :username ORDER BY t.dueDate, t.dueTime")
@@ -36,15 +36,12 @@ public class FilmBean extends EntityBean<Film, Long> {
     }
 
     /**
-     * Suche nach Aufgaben anhand ihrer Bezeichnung, Kategorie und Status.
-     *
-     * Anders als in der Vorlesung behandelt, wird die SELECT-Anfrage hier mit
-     * der CriteriaBuilder-API vollkommen dynamisch erzeugt.
+     * Suche nach Filmen anhand ihres Titels, Genre und Status.
      *
      * @param search In der Kurzbeschreibung enthaltener Text (optional)
      * @param genre Kategorie (optional)
      * @param status Status (optional)
-     * @return Liste mit den gefundenen Aufgaben
+     * @return Liste mit den gefundenen Filmen
      */
     public List<Film> search(String search, Genre genre, FilmStatus status) {
         // Hilfsobjekt zum Bauen des Query
@@ -58,7 +55,7 @@ public class FilmBean extends EntityBean<Film, Long> {
         // ORDER BY dueDate, dueTime
         query.orderBy(cb.asc(from.get("dueDate")), cb.asc(from.get("dueTime")));
 
-        // WHERE t.shortText LIKE :search
+        // WHERE t.name LIKE :search
         Predicate p = cb.conjunction();
 
         if (search != null && !search.trim().isEmpty()) {

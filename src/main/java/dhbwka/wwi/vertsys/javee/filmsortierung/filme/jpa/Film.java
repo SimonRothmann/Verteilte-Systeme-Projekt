@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * Eine zu erledigende Aufgabe.
+ * Ein zu schauender Film.
  */
 @Entity
 public class Film implements Serializable {
