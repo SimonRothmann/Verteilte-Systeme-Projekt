@@ -12,7 +12,7 @@ Creative Commons Namensnennung 4.0 International Lizenz.
 .tile {
     position: relative;
 
-    border: 1px solid lightgrey;
+    border: 1px solid lightskyblue;
     box-shadow: 1px 1px 1px rgba(0,0,0, 0.2);
 
     display: inline-block;
@@ -31,10 +31,10 @@ Creative Commons Namensnennung 4.0 International Lizenz.
     width: 100%;
     height: 100%;
 
-    background-color: white;
+    background-color: lightgrey;
     transition: background-color 0.25s;
 
-    color: #606060;
+    color: lightseagreen;
     z-index: 1;
 }
 
@@ -77,7 +77,7 @@ Creative Commons Namensnennung 4.0 International Lizenz.
 
 /* Besondere Kacheln */
 .tile.overview .content {
-    background-color: #FFFCEB;
+    background-color: white;
 }
 
 .tile.overview .content:hover {
@@ -85,7 +85,7 @@ Creative Commons Namensnennung 4.0 International Lizenz.
 }
 
 .tile.status-all .content {
-    background-color: #f5f5f5;
+    background-color: grey;
     font-weight: bold;
 }
 

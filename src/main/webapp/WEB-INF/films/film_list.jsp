@@ -50,7 +50,7 @@
             </select>
 
             <select name="search_status">
-                <option value="">Alle Stati</option>
+                <option value="">Alle Status</option>
 
                 <c:forEach items="${statuses}" var="status">
                     <option value="${status}" ${param.search_status == status ? 'selected' : ''}>
@@ -68,7 +68,7 @@
         <c:choose>
             <c:when test="${empty films}">
                 <p>
-                    Es wurden noch keine Status erstellt. ❌
+                    Es wurde noch kein Status erstellt. ❌
                 </p>
             </c:when>
             <c:otherwise>
