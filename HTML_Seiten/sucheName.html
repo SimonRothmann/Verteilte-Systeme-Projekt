@@ -116,12 +116,11 @@
 							return;
 						}
 							$.each(temp, function(key, val) {
-								items.push("<h3>" + count + ". Genre</h3>");
+								items.push("<h3>" + count + ". Film</h3>");
 								console.log(val.id);
 								items.push("<li>FilmId: " + val.id + "</li>");
 								items.push("<li>Film: " + val.name + "</li>");
-                                items.push("<li>Spieldauer: " + val.runTime + "</li>");                                   
-                                items.push("<li>Genre: " + val.genre.name + "</li>");                             
+                                items.push("<li>Spieldauer: " + val.runTime + "</li>");                            
                                 items.push("<li>Status: " + val.status + "</li>");
 
 								count = count + 1;
