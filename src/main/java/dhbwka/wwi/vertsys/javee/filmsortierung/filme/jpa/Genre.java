@@ -28,8 +28,8 @@ public class Genre implements Serializable {
     private long id;
 
     @Column(length = 30)
-    @NotNull(message = "Der Name darf nicht leer sein.")
-    @Size(min = 3, max = 30, message = "Wessen Name kürzer als 3 Zeichen ist, darf sich hier nicht anmelden ;)")
+    @NotNull(message = "Das Genre darf nicht leer sein.")
+    @Size(min = 3, max = 30, message = "Wessen Genre kürzer als 3 Zeichen ist, darf hier keins erstellen ;)")
     private String name;
 
     @OneToMany(mappedBy = "genre", fetch = FetchType.LAZY)
