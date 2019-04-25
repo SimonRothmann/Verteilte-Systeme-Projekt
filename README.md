@@ -8,6 +8,9 @@ Dies ist eine Anwendung anhand der Beispielanwendung von Herrn Schulmeister-Zimo
 mit welcher man Filme anlegen und sortieren kann.
 Dabei wurde sich vom Thema her auf Disney Filme spezialisiert. 
 
+Zusätzlich zu Hauptanwendung befinden sich noch HTML/Javascript Seiten in den Dateien,
+mit welchen man die REST-Schnittstelle testen kann. 
+
 Verwendete Technologien
 -----------------------
 
