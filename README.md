@@ -1,15 +1,12 @@
-Beispielanwendung "jTodo"
+Anwendung Disney Filmsortierung
 =========================
 
 Kurzbeschreibung
 ----------------
 
-Dies ist ein Beispiel für eine in Java realisierte, serverseitige MVC-Webanwendung.
-Die Anwendung setzt dabei ganz klassisch auf der „Jakarta Enterprise Edition”
-(ehemals „Java Enterprise Edition“) auf und läuft daher in einem speziell dafür
-ausgelegten Applikationsserver. Sämtliche Anwendungslogik wird dabei vom Server
-implementiert, so dass für jedes URL-Pattern der Anwendung ein komplett serverseitig
-generierte HTML-Seite abgerufen und im Browser dargestellt wird.
+Dies ist eine Anwendung anhand der Beispielanwendung von Herrn Schulmeister-Zimolong, 
+mit welcher man Filme anlegen und sortieren kann.
+Dabei wurde sich vom Thema her auf Disney Filme spezialisiert. 
 
 Verwendete Technologien
 -----------------------
@@ -35,14 +32,10 @@ Folgende Entwicklungswerkzeuge kommen dabei zum Einsatz:
 
 Screenshots
 -----------
+Diese sind in der Testdokumentation zu finden. 
 
 Copyright
 ---------
 
-Dieses Projekt ist lizenziert unter
-[_Creative Commons Namensnennung 4.0 International_](http://creativecommons.org/licenses/by/4.0/)
+© 2018 – 2019 Viktoria Ibach, Julia Becker, Simon Rothmann <br/>
 
-© 2018 – 2019 Dennis Schulmeister-Zimolong <br/>
-
-E-Mail: [dhbw@windows3.de](mailto:dhbw@windows3.de) <br/>
-Webseite: https://www.wpvs.de
